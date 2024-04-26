@@ -14,9 +14,9 @@ import ProductCard from './ProductCard.vue'
         >
       </div>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
-        <div>
-          <ProductCard />
-        </div>
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </div>
     </div>
   </section>

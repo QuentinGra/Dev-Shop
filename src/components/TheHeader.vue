@@ -14,7 +14,9 @@
       ></a>
       <nav id="navbar" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a href="/" class="nav-link">Accueil</a></li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">Accueil</a>
+          </li>
           <li class="nav-item"><a href="/" class="nav-link">Admin</a></li>
           <li class="nav-item dropdown">
             <a href="/" class="nav-link dropdown-toggle disabled">Déroulant</a>
