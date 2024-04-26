@@ -13,7 +13,7 @@ import ProductCard from './ProductCard.vue'
           ><i class="me-2 bi bi-funnel"></i>Filter</a
         >
       </div>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
         <div>
           <ProductCard />
         </div>

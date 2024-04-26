@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import ProductList from '@/components/ProductList.vue'
+import ProductFilters from '@/components/ProductFilters.vue'
 </script>
 
 <template>
-  <main class="mt-5">
+  <main>
     <div class="d-md-flex">
+      <ProductFilters />
       <div class="flex-fill">
         <ProductList />
       </div>
