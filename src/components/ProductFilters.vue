@@ -78,4 +78,9 @@
   </aside>
 </template>
 
-<style scoped></style>
+<style scoped>
+aside {
+  position: sticky;
+  top: 70px;
+}
+</style>
