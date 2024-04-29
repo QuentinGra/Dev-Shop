@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ThemeDropdown from './ThemeDropdown.vue'
+</script>
 
 <template>
   <header class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
@@ -43,22 +45,7 @@
             <hr class="d-lg-none my-2 text-white-50" />
           </li>
           <li class="nav-item dropdown">
-            <button class="nav-link dropdown-toggle text-uppercase" data-bs-toggle="dropdown">
-              <i class="bi bi-circle-half"></i>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li>
-                <button class="dropdown-item"><i class="bi bi-sun-fill pe-2"></i>Clair</button>
-              </li>
-              <li>
-                <button class="dropdown-item">
-                  <i class="bi bi-moon-stars-fill pe-2"></i>Sombre
-                </button>
-              </li>
-              <li>
-                <button class="dropdown-item"><i class="bi bi-circle-half pe-2"></i>Auto</button>
-              </li>
-            </ul>
+            <ThemeDropdown />
           </li>
         </ul>
       </nav>
