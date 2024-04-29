@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ProductCard from './ProductCard.vue'
+let title = 'Tous les produits'
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import ProductCard from './ProductCard.vue'
   >
     <div>
       <div>
-        <h2 class="mb-4 d-inline-block me-3 text-uppercase">Tous les produits (1)</h2>
+        <h2 class="mb-4 d-inline-block me-3 text-uppercase">{{ title }}</h2>
         <a href="/" class="btn btn-sm btn-outline-warning h2"
           ><i class="me-2 bi bi-funnel"></i>Filter</a
         >
