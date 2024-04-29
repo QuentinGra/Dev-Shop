@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ThemeDropdown from './ThemeDropdown.vue'
+import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
 </script>
 
 <template>

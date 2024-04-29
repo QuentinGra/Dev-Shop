@@ -3,7 +3,7 @@ let product = {
   name: 'Clavier arc-en-ciel',
   description: 'Un clavier mécanique avec des touches qui changent de couleur à chaque pression.',
   price: 150,
-  illustration: 'products/rainbow_keyboard.jpg',
+  illustration: 'rainbow_keyboard.jpg',
   createdAt: '2023-12-22T13:39:47.000Z',
   updateAt: null,
   categoryId: 1,
@@ -19,7 +19,7 @@ let product = {
 <template>
   <div>
     <div class="card bg-body-secondary shadow mb-4">
-      <img :src="product.illustration" alt="" class="card-img-top test" />
+      <img :src="'/products/' + product.illustration" alt="" class="card-img-top test" />
       <div class="card-body text-start">
         <div class="d-flex justify-content-between align-items-start">
           <a href="" class="text-body text-decoration-none">
