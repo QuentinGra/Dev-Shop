@@ -26,8 +26,16 @@
           <li class="nav-item">
             <a href="/" class="nav-link"><i class="bi bi-cart-check-fill"></i></a>
           </li>
+          <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+            <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+            <hr class="d-lg-none my-2 text-white-50" />
+          </li>
           <li class="nav-item">
             <a href="/" class="nav-link">Connexion<i class="bi bi-box-arrow-in-right"></i></a>
+          </li>
+          <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+            <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+            <hr class="d-lg-none my-2 text-white-50" />
           </li>
           <li class="nav-item dropdown">
             <button class="nav-link dropdown-toggle text-uppercase" data-bs-toggle="dropdown">
