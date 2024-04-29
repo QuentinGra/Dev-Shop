@@ -1,6 +1,16 @@
 /* COLORS */
+$fc-blue: #05dfd7;
+$fc-pink: #fc29f6;
+$fc-green: #21fc0d;
 
-$primary: #05dfd7;
-$info: #fc29f6;
-$warning: #21fc0d;
 /* FONT */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+$primary-font-family: "Lato", sans-serif;
+
+/* ROOT */
+:root {
+    --fc-blue: #{$fc-blue};
+    --fc-pink: #{$fc-pink};
+    --fc-green: #{$fc-green};
+    --primary-font-family: #{$primary-font-family};
+}

@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+let isCategory1 = true
+</script>
 
 <template>
   <aside
@@ -26,9 +28,18 @@
       </h4>
       <ul class="list-group item form-check">
         <li class="list-group item">
-          <div class="list-group-item list-group-item-action fc-pointer mb-1">
+          <div
+            class="list-group-item list-group-item-action fc-pointer mb-1"
+            :class="[isCategory1 ? 'border-primary' : '']"
+          >
             <label for="cat-1" class="form-check">
-              <input id="cat-1" class="form-check-input" name="cat-1" type="checkbox" />
+              <input
+                id="cat-1"
+                class="form-check-input"
+                :checked="[isCategory1 ? true : false]"
+                name="cat-1"
+                type="checkbox"
+              />
               <span class="form-check-label fs-7">Catégorie 1</span>
             </label>
           </div>
@@ -78,4 +89,9 @@
   </aside>
 </template>
 
-<style scoped></style>
+<style scoped>
+aside {
+  position: sticky;
+  top: 70px;
+}
+</style>

@@ -2,6 +2,15 @@
 import TheHeader from '@/components/TheHeader.vue'
 import TheHome from '@/views/TheHome.vue'
 import TheFooter from '@/components/TheFooter.vue'
+
+const userPrefersDark =
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
+if (userPrefersDark) {
+  document.documentElement.dataset.bsTheme = 'dark'
+} else {
+  document.documentElement.dataset.bsTheme = 'light'
+}
 </script>
 
 <template>

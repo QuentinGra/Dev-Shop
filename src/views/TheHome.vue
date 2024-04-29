@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ProductList from '@/components/ProductList.vue'
-import ProductFilters from '@/components/ProductFilters.vue'
+import ProductList from '@/components/shop/ProductList.vue'
+import ProductFilters from '@/components/shop/ProductFilters.vue'
 </script>
 
 <template>
