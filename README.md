@@ -3,4 +3,4 @@
 ## Stack
 - **`Vue`**
 - **`Ts`**
-- Scss
+- **`Scss`**
