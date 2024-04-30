@@ -1,6 +1,6 @@
-# Shop flashy coder
+# Shop Flashy Coder
 
 ## Stack
-- Vue
+- **`Vue`**
 - Ts
 - Scss
