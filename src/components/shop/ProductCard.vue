@@ -1,5 +1,8 @@
 <script setup lang="ts">
-let product = {
+import { type products } from '@/interface/product.interface'
+
+const product: products = {
+  productId: 1,
   name: 'Clavier arc-en-ciel',
   description: 'Un clavier mécanique avec des touches qui changent de couleur à chaque pression.',
   price: 150,
