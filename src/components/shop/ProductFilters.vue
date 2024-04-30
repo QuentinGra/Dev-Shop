@@ -1,5 +1,5 @@
 <script setup lang="ts">
-let isCategory1 = true
+const isCategory1 = true
 </script>
 
 <template>
@@ -30,13 +30,13 @@ let isCategory1 = true
         <li class="list-group item">
           <div
             class="list-group-item list-group-item-action fc-pointer mb-1"
-            :class="[isCategory1 ? 'border-primary' : '']"
+            :class="{ 'border-primary': isCategory1 }"
           >
             <label for="cat-1" class="form-check">
               <input
                 id="cat-1"
                 class="form-check-input"
-                :checked="[isCategory1 ? true : false]"
+                :checked="isCategory1"
                 name="cat-1"
                 type="checkbox"
               />
