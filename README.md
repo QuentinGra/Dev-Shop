@@ -2,5 +2,5 @@
 
 ## Stack
 - **`Vue`**
-- Ts
+- **`Ts`**
 - Scss
