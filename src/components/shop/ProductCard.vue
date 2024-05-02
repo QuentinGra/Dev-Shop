@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type products } from '@/interface/product.interface'
+import { type products } from '@/interfaces/product.interface'
 
 const product: products = {
   productId: 1,
