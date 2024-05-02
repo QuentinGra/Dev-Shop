@@ -1,4 +1,4 @@
-export interface filters {
+export interface filtersInterface {
   search: search
   categories: categories
   prices: prices
