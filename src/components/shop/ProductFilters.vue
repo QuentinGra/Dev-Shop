@@ -37,12 +37,12 @@ const isCategory1 = true
             class="list-group-item list-group-item-action fc-pointer mb-1"
             :class="{ 'border-primary': isCategory1 }"
           >
-            <label for="cat-1" class="form-check">
+            <label :for="`${filter.categories.title}-${index + 1}`" class="form-check">
               <input
                 id="cat-1"
                 class="form-check-input"
                 :checked="isCategory1"
-                name="cat-1"
+                :name="`${filter.categories.title}-${index + 1}`"
                 :type="filter.categories.inputType"
                 :value="filter.categories.value"
               />
@@ -60,7 +60,7 @@ const isCategory1 = true
       <ul class="list-group item form-check">
         <li v-for="(item, index) in filter.prices.items" :key="index" class="list-group item">
           <div class="list-group-item list-group-item-action fc-pointer mb-1">
-            <label for="p-1" class="form-check">
+            <label for="p" class="form-check">
               <input
                 id="p-1"
                 class="form-check-input"
