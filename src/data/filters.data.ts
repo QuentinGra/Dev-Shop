@@ -1,4 +1,6 @@
-const filters = {
+import { type filters } from '@/interface/filters.interface'
+
+export const filter: filters = {
   search: {
     title: 'Rechercher',
     icon: 'bi-binoculars-fill',

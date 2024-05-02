@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { filter } from '@/data/filters.data'
 const isCategory1 = true
 </script>
 
@@ -11,11 +12,15 @@ const isCategory1 = true
     </div>
     <div class="mt-4">
       <h4 class="text-uppercase h6 pb-2">
-        <i class="bi me-2 bi-binoculars-fill"></i>
-        Rechercher
+        <i :class="filter.search.icon" class="me-2"></i>
+        {{ filter.search.title }}
       </h4>
       <div class="input-group mb-3">
-        <input type="text" class="form-control fs-7" placeholder="Chercher" />
+        <input
+          :type="filter.search.inputType"
+          class="form-control fs-7"
+          :placeholder="filter.search.placeholder"
+        />
         <span class="input-group-text btn btn-primary fc-pointer">
           <i class="bi bi-search"></i>
         </span>
@@ -23,11 +28,11 @@ const isCategory1 = true
     </div>
     <div class="mt-4">
       <h4 class="text-uppercase h6 pb-2">
-        <i class="bi me-2 bi-tags-fill"></i>
-        Catégories
+        <i :class="filter.categories.icon" class="me-2"></i>
+        {{ filter.categories.title }}
       </h4>
       <ul class="list-group item form-check">
-        <li class="list-group item">
+        <li v-for="(item, index) in filter.categories.items" :key="index" class="list-group item">
           <div
             class="list-group-item list-group-item-action fc-pointer mb-1"
             :class="{ 'border-primary': isCategory1 }"
@@ -38,17 +43,10 @@ const isCategory1 = true
                 class="form-check-input"
                 :checked="isCategory1"
                 name="cat-1"
-                type="checkbox"
+                :type="filter.categories.inputType"
+                :value="filter.categories.value"
               />
-              <span class="form-check-label fs-7">Catégorie 1</span>
-            </label>
-          </div>
-        </li>
-        <li class="list-group item">
-          <div class="list-group-item list-group-item-action fc-pointer mb-1">
-            <label for="cat-2" class="form-check">
-              <input id="cat-2" class="form-check-input" name="cat-2" type="checkbox" />
-              <span class="form-check-label fs-7">Catégorie 2</span>
+              <span class="form-check-label fs-7">{{ item.name }}</span>
             </label>
           </div>
         </li>
@@ -56,31 +54,21 @@ const isCategory1 = true
     </div>
     <div class="mt-4">
       <h4 class="text-uppercase h6 pb-2">
-        <i class="bi me-2 bi-coin"></i>
-        Catégories
+        <i :class="filter.prices.icon" class="me-2"></i>
+        {{ filter.prices.title }}
       </h4>
       <ul class="list-group item form-check">
-        <li class="list-group item">
+        <li v-for="(item, index) in filter.prices.items" :key="index" class="list-group item">
           <div class="list-group-item list-group-item-action fc-pointer mb-1">
             <label for="p-1" class="form-check">
-              <input id="p-1" class="form-check-input" name="p" type="radio" />
-              <span class="form-check-label fs-7">Tous les prix</span>
-            </label>
-          </div>
-        </li>
-        <li class="list-group item">
-          <div class="list-group-item list-group-item-action fc-pointer mb-1">
-            <label for="p-2" class="form-check">
-              <input id="p-2" class="form-check-input" name="p" type="radio" />
-              <span class="form-check-label fs-7">Moins de 100€</span>
-            </label>
-          </div>
-        </li>
-        <li class="list-group item">
-          <div class="list-group-item list-group-item-action fc-pointer mb-1">
-            <label for="p-3" class="form-check">
-              <input id="p-3" class="form-check-input" name="p" type="radio" />
-              <span class="form-check-label fs-7">Entre 100 et 500€</span>
+              <input
+                id="p-1"
+                class="form-check-input"
+                name="p"
+                :type="filter.prices.inputType"
+                :value="filter.prices.value"
+              />
+              <span class="form-check-label fs-7">{{ item.name }}</span>
             </label>
           </div>
         </li>
@@ -89,9 +77,4 @@ const isCategory1 = true
   </aside>
 </template>
 
-<style scoped>
-aside {
-  position: sticky;
-  top: 70px;
-}
-</style>
+<style scoped></style>
