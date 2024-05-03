@@ -1,6 +1,14 @@
 <script setup lang="ts">
-import { filter } from '@/data/filters.data'
-const isCategory1 = true
+import { INITIALS_FILTERS } from '@/data/filters.data'
+import { reactive } from 'vue'
+
+const state = reactive({
+  filters: INITIALS_FILTERS
+})
+
+// const test = (e: Event) => {
+//   console.log((e.target! as HTMLInputElement).value)
+// }
 </script>
 
 <template>
@@ -12,14 +20,15 @@ const isCategory1 = true
     </div>
     <div class="mt-4">
       <h4 class="text-uppercase h6 pb-2">
-        <i :class="filter.search.icon" class="me-2"></i>
-        {{ filter.search.title }}
+        <i :class="state.filters.search.icon" class="me-2"></i>
+        {{ state.filters.search.title }}
       </h4>
       <div class="input-group mb-3">
         <input
-          :type="filter.search.inputType"
+          :type="state.filters.search.inputType"
           class="form-control fs-7"
-          :placeholder="filter.search.placeholder"
+          v-model="state.filters.search.value"
+          :placeholder="state.filters.search.placeholder"
         />
         <span class="input-group-text btn btn-primary fc-pointer">
           <i class="bi bi-search"></i>
@@ -28,23 +37,27 @@ const isCategory1 = true
     </div>
     <div class="mt-4">
       <h4 class="text-uppercase h6 pb-2">
-        <i :class="filter.categories.icon" class="me-2"></i>
-        {{ filter.categories.title }}
+        <i :class="state.filters.categories.icon" class="me-2"></i>
+        {{ state.filters.categories.title }}
       </h4>
       <ul class="list-group item form-check">
-        <li v-for="(item, index) in filter.categories.items" :key="index" class="list-group item">
+        <li
+          v-for="(item, index) in state.filters.categories.items"
+          :key="index"
+          class="list-group item"
+        >
           <div
             class="list-group-item list-group-item-action fc-pointer mb-1"
-            :class="{ 'border-primary': isCategory1 }"
+            :class="state.filters.categories.value.includes(item.value) ? 'border-primary' : ''"
           >
-            <label :for="`${filter.categories.title}-${index + 1}`" class="form-check">
+            <label :for="'category' + item.id" class="form-check">
               <input
-                id="cat-1"
+                :id="'category' + item.id"
                 class="form-check-input"
-                :checked="isCategory1"
-                :name="`${filter.categories.title}-${index + 1}`"
-                :type="filter.categories.inputType"
-                :value="filter.categories.value"
+                v-model="state.filters.categories.value"
+                :name="'category' + item.id"
+                :type="state.filters.categories.inputType"
+                :value="item.value"
               />
               <span class="form-check-label fs-7">{{ item.name }}</span>
             </label>
@@ -54,19 +67,25 @@ const isCategory1 = true
     </div>
     <div class="mt-4">
       <h4 class="text-uppercase h6 pb-2">
-        <i :class="filter.prices.icon" class="me-2"></i>
-        {{ filter.prices.title }}
+        <i :class="state.filters.prices.icon" class="me-2"></i>
+        {{ state.filters.prices.title }}
       </h4>
       <ul class="list-group item form-check">
-        <li v-for="(item, index) in filter.prices.items" :key="index" class="list-group item">
+        <li
+          v-for="(item, index) in state.filters.prices.items"
+          :key="index"
+          class="list-group item"
+        >
           <div class="list-group-item list-group-item-action fc-pointer mb-1">
             <label for="p" class="form-check">
               <input
+                @change="state.filters.prices.value = item.value"
                 id="p-1"
                 class="form-check-input"
                 name="p"
-                :type="filter.prices.inputType"
-                :value="filter.prices.value"
+                v-model="state.filters.prices.value"
+                :type="state.filters.prices.inputType"
+                :value="item.value"
               />
               <span class="form-check-label fs-7">{{ item.name }}</span>
             </label>
