@@ -31,5 +31,6 @@ export interface prices {
 export interface item {
   id: number
   name: string
+  isCategory?: boolean
   value: string
 }

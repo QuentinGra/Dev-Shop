@@ -1,6 +1,6 @@
 import { type filtersInterface } from '@/interfaces/filters.interface'
 
-export const filter: filtersInterface = {
+export const INITIALS_FILTERS: filtersInterface = {
   search: {
     title: 'Rechercher',
     icon: 'bi-binoculars-fill',
@@ -17,16 +17,19 @@ export const filter: filtersInterface = {
       {
         id: 1,
         name: 'Gadgets Lumineux',
+        isCategory: false,
         value: 'luminous-gadgets'
       },
       {
         id: 2,
         name: 'Technologie Futuriste',
+        isCategory: false,
         value: 'futuristic-technology'
       },
       {
         id: 3,
         name: 'Café et Code',
+        isCategory: false,
         value: 'coffee-and-code'
       }
     ]
