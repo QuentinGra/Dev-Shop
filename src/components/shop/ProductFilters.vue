@@ -9,14 +9,6 @@ const state = reactive({
 // const test = (e: Event) => {
 //   console.log((e.target! as HTMLInputElement).value)
 // }
-
-const borderColor = (item: any): void => {
-  if (!item.isCategory) {
-    item.isCategory = true
-  } else {
-    item.isCategory = false
-  }
-}
 </script>
 
 <template>
@@ -56,17 +48,16 @@ const borderColor = (item: any): void => {
         >
           <div
             class="list-group-item list-group-item-action fc-pointer mb-1"
-            :class="item.isCategory ? 'border-primary' : ''"
+            :class="state.filters.categories.value.includes(item.value) ? 'border-primary' : ''"
           >
-            <label :for="`${state.filters.categories.title}-${index + 1}`" class="form-check">
+            <label :for="'category' + item.id" class="form-check">
               <input
-                @change="borderColor(item)"
-                id="cat-1"
+                :id="'category' + item.id"
                 class="form-check-input"
                 v-model="state.filters.categories.value"
-                :name="`${state.filters.categories.title}-${index + 1}`"
+                :name="'category' + item.id"
                 :type="state.filters.categories.inputType"
-                :value="item"
+                :value="item.value"
               />
               <span class="form-check-label fs-7">{{ item.name }}</span>
             </label>

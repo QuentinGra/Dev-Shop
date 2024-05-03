@@ -16,7 +16,7 @@ export interface categories {
   title: string
   icon: string
   inputType: 'checkbox'
-  value: []
+  value: string[]
   items: item[]
 }
 
