@@ -24,7 +24,7 @@ const getBrowserTheme = (): string => {
 
 const activeIcon = reactive({
   icon: 'bi-circle-half',
-  bg: 'bg-icon'
+  bg: 'bg-info'
 })
 </script>
 
