@@ -13,16 +13,18 @@ const state = reactive({
 
 <template>
   <aside
-    class="bg-body-secondary border shadow-sm d-flex flex-column flex-shrink-0 p-3 rounded w-md-25 m-2"
+    class="overflow-hidden bg-body-secondary border shadow-sm d-flex flex-column flex-shrink-0 p-3 rounded w-md-25 m-2"
   >
     <div class="text-center text-md-end order-1 order-md-0">
       <i class="bi bi-x-circle text-info bg fs-4 fc-pointer"></i>
     </div>
     <div class="mt-4">
-      <h4 class="text-uppercase h6 pb-2">
-        <i :class="state.filters.search.icon" class="me-2"></i>
-        {{ state.filters.search.title }}
-      </h4>
+      <Transition name="shake" appear>
+        <h4 class="text-uppercase h6 pb-2">
+          <i :class="state.filters.search.icon" class="me-2"></i>
+          {{ state.filters.search.title }}
+        </h4>
+      </Transition>
       <div class="input-group mb-3">
         <input
           :type="state.filters.search.inputType"
@@ -36,10 +38,12 @@ const state = reactive({
       </div>
     </div>
     <div class="mt-4">
-      <h4 class="text-uppercase h6 pb-2">
-        <i :class="state.filters.categories.icon" class="me-2"></i>
-        {{ state.filters.categories.title }}
-      </h4>
+      <Transition name="shake2" appear>
+        <h4 class="text-uppercase h6 pb-2">
+          <i :class="state.filters.categories.icon" class="me-2"></i>
+          {{ state.filters.categories.title }}
+        </h4>
+      </Transition>
       <ul class="list-group item form-check">
         <li
           v-for="(item, index) in state.filters.categories.items"
@@ -66,10 +70,12 @@ const state = reactive({
       </ul>
     </div>
     <div class="mt-4">
-      <h4 class="text-uppercase h6 pb-2">
-        <i :class="state.filters.prices.icon" class="me-2"></i>
-        {{ state.filters.prices.title }}
-      </h4>
+      <Transition name="shake3" appear>
+        <h4 class="text-uppercase h6 pb-2">
+          <i :class="state.filters.prices.icon" class="me-2"></i>
+          {{ state.filters.prices.title }}
+        </h4>
+      </Transition>
       <ul class="list-group item form-check">
         <li
           v-for="(item, index) in state.filters.prices.items"
@@ -96,4 +102,18 @@ const state = reactive({
   </aside>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'animate.css/source/attention_seekers/shakeX.css';
+
+.shake-enter-active {
+  animation: shakeX 2s;
+}
+.shake2-enter-active {
+  animation: shakeX 2s;
+  animation-delay: 0.5s;
+}
+.shake3-enter-active {
+  animation: shakeX 2s;
+  animation-delay: 1s;
+}
+</style>

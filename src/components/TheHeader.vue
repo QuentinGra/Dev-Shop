@@ -27,7 +27,9 @@ import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a href="/" class="nav-link">
-              <i class="bi bi-cart-check-fill"></i>
+              <Transition name="shake" appear>
+                <i class="bi bi-cart-check-fill"></i>
+              </Transition>
               <small
                 class="position-absolute top-0 translate-middle-x m-1 gd-basket-counter badge rounded-pill bg-info"
               ></small>
@@ -53,4 +55,10 @@ import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
   </header>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import 'animate.css/source/attention_seekers/shakeX.css';
+
+.shake-enter-active {
+  animation: shakeX 2s;
+}
+</style>
