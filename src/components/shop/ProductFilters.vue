@@ -6,18 +6,27 @@ const state = reactive({
   filters: INITIALS_FILTERS
 })
 
-// const test = (e: Event) => {
-//   console.log((e.target! as HTMLInputElement).value)
-// }
+defineProps<{
+  visibility: boolean
+}>()
+
+const emit = defineEmits<{
+  eventToggleFilter: [boolean]
+}>()
+
+const toggleFilter = (): void => {
+  emit('eventToggleFilter', false)
+}
 </script>
 
 <template>
-  <aside
-    class="overflow-hidden bg-body-secondary border shadow-sm d-flex flex-column flex-shrink-0 p-3 rounded w-md-25 m-2"
-  >
+  <aside class="bg-body-secondary border shadow-sm d-flex flex-column flex-shrink-0 p-3 rounded">
+    <!-- Button close -->
     <div class="text-center text-md-end order-1 order-md-0">
-      <i class="bi bi-x-circle text-info bg fs-4 fc-pointer"></i>
+      <i @click="toggleFilter" class="bi bi-x-circle text-info bg fs-4 fc-pointer"></i>
     </div>
+
+    <!-- Search -->
     <div class="mt-4">
       <Transition name="shake" appear>
         <h4 class="text-uppercase h6 pb-2">
@@ -37,6 +46,8 @@ const state = reactive({
         </span>
       </div>
     </div>
+
+    <!-- Categories -->
     <div class="mt-4">
       <Transition name="shake2" appear>
         <h4 class="text-uppercase h6 pb-2">
@@ -69,6 +80,8 @@ const state = reactive({
         </li>
       </ul>
     </div>
+
+    <!-- Prices -->
     <div class="mt-4">
       <Transition name="shake3" appear>
         <h4 class="text-uppercase h6 pb-2">
@@ -115,5 +128,9 @@ const state = reactive({
 .shake3-enter-active {
   animation: shakeX 2s;
   animation-delay: 1s;
+}
+
+.fc-pointer {
+  cursor: pointer;
 }
 </style>

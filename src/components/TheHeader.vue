@@ -1,5 +1,17 @@
 <script setup lang="ts">
 import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
+import type { productsInterface } from '@/interfaces/product.interface'
+import { ref, watchEffect, type Ref } from 'vue'
+
+const props = defineProps<{
+  dataProduct: productsInterface | null
+}>()
+
+const basket: Ref<productsInterface[]> = ref([])
+
+watchEffect(() => {
+  if (props.dataProduct) basket.value.push(props.dataProduct)
+})
 </script>
 
 <template>
@@ -30,7 +42,8 @@ import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
               <i class="bi bi-cart-check-fill"></i>
               <small
                 class="position-absolute top-0 translate-middle-x m-1 gd-basket-counter badge rounded-pill bg-info"
-              ></small>
+                >{{ basket.length }}</small
+              >
             </a>
           </li>
           <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
