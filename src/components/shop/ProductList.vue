@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ProductCard from './ProductCard.vue'
+import products from '@/data/products.json'
 let title = 'Tous les produits'
 </script>
 
@@ -15,7 +16,9 @@ let title = 'Tous les produits'
         >
       </div>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
-        <ProductCard />
+        <div v-for="(product, i) in products" :key="i">
+          <ProductCard :data-product="product" />
+        </div>
       </div>
     </div>
   </section>

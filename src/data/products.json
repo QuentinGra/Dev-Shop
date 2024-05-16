@@ -1,0 +1,152 @@
+[
+  {
+    "productId": 1,
+    "name": "Clavier arc-en-ciel",
+    "description": "Un clavier mécanique avec des touches qui changent de couleur à chaque pression.",
+    "price": 150,
+    "illustration": "rainbow_keyboard.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 1,
+    "category": {
+      "categoryId": 1,
+      "name": "Gadgets Lumineux",
+      "description": "Des gadgets qui illuminent votre espace de travail avec des lumières vives et colorées."
+    }
+  },
+  {
+    "productId": 2,
+    "name": "Souris volante",
+    "description": "Une souris d'ordinateur qui flotte dans les airs grâce à la lévitation magnétique.",
+    "price": 200,
+    "illustration": "flying_mouse.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 2,
+    "category": {
+      "categoryId": 2,
+      "name": "Technologie Futuriste",
+      "description": "Des produits qui semblent venir tout droit du futur. Préparez-vous à être émerveillé."
+    }
+  },
+  {
+    "productId": 3,
+    "name": "Tasse à café programmable",
+    "description": "Une tasse à café qui affiche des messages programmables en utilisant la chaleur du café.",
+    "price": 50,
+    "illustration": "programmable_coffee_mug.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 3,
+    "category": {
+      "categoryId": 3,
+      "name": "Café et Code",
+      "description": "Tout ce dont vous avez besoin pour transformer votre café du matin en une expérience de codage."
+    }
+  },
+  {
+    "productId": 4,
+    "name": "Casque de réalité virtuelle pour codage",
+    "description": "Un casque de réalité virtuelle qui vous permet de coder dans un environnement 3D immersif.",
+    "price": 500,
+    "illustration": "vr_coding_headset.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 2,
+    "category": {
+      "categoryId": 2,
+      "name": "Gadgets",
+      "description": "Gadgets extravagants pour développeurs"
+    }
+  },
+  {
+    "productId": 5,
+    "name": "Lampe de bureau à LED programmable",
+    "description": "Une lampe de bureau qui affiche des animations en LED programmables pour égayer votre espace de travail.",
+    "price": 80,
+    "illustration": "programmable_led_lamp.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 1,
+    "category": {
+      "categoryId": 1,
+      "name": "Gadgets Lumineux",
+      "description": "Des gadgets qui illuminent votre espace de travail avec des lumières vives et colorées."
+    }
+  },
+  {
+    "productId": 6,
+    "name": "Drone livreur de café",
+    "description": "Un drone miniature qui vous livre votre café directement à votre bureau. Plus besoin de faire une pause café !",
+    "price": 300,
+    "illustration": "coffee_drone.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 3,
+    "category": {
+      "categoryId": 3,
+      "name": "Café et Code",
+      "description": "Tout ce dont vous avez besoin pour transformer votre café du matin en une expérience de codage."
+    }
+  },
+  {
+    "productId": 7,
+    "name": "Clavier holographique",
+    "description": "Un clavier qui projette des touches holographiques. Tapez dans l'air comme si vous aviez un clavier physique.",
+    "price": 250,
+    "illustration": "holographic_keyboard.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 2,
+    "category": {
+      "categoryId": 2,
+      "name": "Technologie Futuriste",
+      "description": "Des produits qui semblent venir tout droit du futur. Préparez-vous à être émerveillé."
+    }
+  },
+  {
+    "productId": 8,
+    "name": "Tapis de souris chauffant",
+    "description": "Un tapis de souris qui chauffe pour garder votre main au chaud pendant que vous codez.",
+    "price": 30,
+    "illustration": "heating_mouse_pad.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 3,
+    "category": {
+      "categoryId": 3,
+      "name": "Café et Code",
+      "description": "Tout ce dont vous avez besoin pour transformer votre café du matin en une expérience de codage."
+    }
+  },
+  {
+    "productId": 9,
+    "name": "Écran transparent",
+    "description": "Un écran d'ordinateur transparent qui vous permet de voir ce qui se passe derrière tout en travaillant.",
+    "price": 600,
+    "illustration": "transparent_screen.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 2,
+    "category": {
+      "categoryId": 2,
+      "name": "Technologie Futuriste",
+      "description": "Des produits qui semblent venir tout droit du futur. Préparez-vous à être émerveillé."
+    }
+  },
+  {
+    "productId": 10,
+    "name": "Lunettes de codage",
+    "description": "Des lunettes qui projettent votre code devant vos yeux, vous permettant de coder n'importe où, n'importe quand.",
+    "price": 400,
+    "illustration": "coding_glasses.jpg",
+    "createdAt": "2023-12-22T13:39:47.000Z",
+    "updateAt": null,
+    "categoryId": 2,
+    "category": {
+      "categoryId": 2,
+      "name": "Technologie Futuriste",
+      "description": "Des produits qui semblent venir tout droit du futur. Préparez-vous à être émerveillé."
+    }
+  }
+]
