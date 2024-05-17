@@ -6,6 +6,8 @@ const props = defineProps<{
   productFilters: filtersInterface
 }>()
 
+const { productFilters } = props
+
 const emit = defineEmits<{
   eventToggleFilter: [boolean]
 }>()
@@ -13,8 +15,6 @@ const emit = defineEmits<{
 const toggleFilter = (): void => {
   emit('eventToggleFilter', false)
 }
-
-const { productFilters } = props
 
 function updateCategoriesValues(value: string, e: Event) {
   const target = e.target as HTMLInputElement
