@@ -16,7 +16,7 @@ const toggleFilter = (): void => {
   emit('eventToggleFilter', false)
 }
 
-function updateCategoriesValues(value: string, e: Event) {
+const updateCategoriesValues = (value: string, e: Event) => {
   const target = e.target as HTMLInputElement
   if (target.checked) {
     productFilters.categories.value.push(value)

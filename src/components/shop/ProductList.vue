@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import ProductCard from './ProductCard.vue'
-import products from '@/data/products.json'
-import { type productsInterface } from '@/interfaces/product.interface'
+import type { productsInterface } from '@/interfaces/product.interface'
 let title = 'Tous les produits'
 
-defineProps<{
+const props = defineProps<{
   visibility: boolean
+  product: productsInterface[]
 }>()
 
 const emit = defineEmits<{
@@ -34,7 +34,7 @@ const moveProductToBasket = (product: productsInterface): void => {
         >
       </div>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
-        <div v-for="(product, i) in products" :key="i">
+        <div v-for="(product, i) in props.product" :key="i">
           <ProductCard :data-product="product" @event-add-product-to-basket="moveProductToBasket" />
         </div>
       </div>

@@ -34,6 +34,7 @@ defineProps<{
             <a href="/" class="nav-link">
               <i class="bi bi-cart-check-fill"></i>
               <small
+                v-if="dataProduct.length"
                 class="position-absolute top-0 translate-middle-x m-1 gd-basket-counter badge rounded-pill bg-info"
                 >{{ dataProduct.length }}</small
               >
