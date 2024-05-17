@@ -1,8 +1,13 @@
 <script setup lang="ts">
+import { reactive, ref, type Ref } from 'vue'
 import ProductList from '@/components/shop/ProductList.vue'
 import ProductFilters from '@/components/shop/ProductFilters.vue'
-import { ref, type Ref } from 'vue'
 import type { productsInterface } from '@/interfaces/product.interface'
+import { INITIALS_FILTERS } from '@/data/filters.data'
+
+const state = reactive({
+  filters: INITIALS_FILTERS
+})
 
 const isShow: Ref<boolean> = ref(false)
 
@@ -23,7 +28,11 @@ const moveProductToBasket = (product: productsInterface): void => {
   <main>
     <div class="d-md-flex">
       <div v-if="isShow">
-        <ProductFilters :visibility="isShow" @event-toggle-filter="toggleFilter" />
+        <ProductFilters
+          :product-filters="state.filters"
+          :visibility="isShow"
+          @event-toggle-filter="toggleFilter"
+        />
       </div>
       <div class="flex-fill">
         <ProductList

@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { INITIALS_FILTERS } from '@/data/filters.data'
-import { reactive } from 'vue'
+import type { filtersInterface } from '@/interfaces/filters.interface'
 
-const state = reactive({
-  filters: INITIALS_FILTERS
-})
-
-defineProps<{
+const props = defineProps<{
   visibility: boolean
+  productFilters: filtersInterface
 }>()
 
 const emit = defineEmits<{
@@ -17,96 +13,85 @@ const emit = defineEmits<{
 const toggleFilter = (): void => {
   emit('eventToggleFilter', false)
 }
+
+const { productFilters } = props
+
+function updateCategoriesValues(value: string, e: Event) {
+  const target = e.target as HTMLInputElement
+  if (target.checked) {
+    productFilters.categories.value.push(value)
+  } else {
+    productFilters.categories.value = productFilters.categories.value.filter(
+      (cat: string) => cat !== value
+    )
+  }
+}
 </script>
 
 <template>
   <aside class="bg-body-secondary border shadow-sm d-flex flex-column flex-shrink-0 p-3 rounded">
-    <!-- Button close -->
+    <!-- Button close  -->
     <div class="text-center text-md-end order-1 order-md-0">
-      <i @click="toggleFilter" class="bi bi-x-circle text-info bg fs-4 fc-pointer"></i>
+      <i @click="toggleFilter" class="fc-pointer bi bi-x-circle text-info bg fs-4 gd-pointer"></i>
     </div>
 
-    <!-- Search -->
-    <div class="mt-4">
-      <Transition name="shake" appear>
-        <h4 class="text-uppercase h6 pb-2">
-          <i :class="state.filters.search.icon" class="me-2"></i>
-          {{ state.filters.search.title }}
-        </h4>
-      </Transition>
-      <div class="input-group mb-3">
+    <!-- FILTERS -->
+    <div class="mt-4" v-for="(filter, key) in productFilters" :key="key">
+      <h4 class="text-uppercase h6 pb-2">
+        <i class="bi me-2" :class="filter.icon"></i>{{ filter.title }}
+      </h4>
+      <div v-if="filter.title === 'Rechercher'" class="input-group mb-3">
         <input
-          :type="state.filters.search.inputType"
+          :type="filter.inputType"
           class="form-control fs-7"
-          v-model="state.filters.search.value"
-          :placeholder="state.filters.search.placeholder"
+          :class="filter.value ? 'border border-primary-subtle' : ''"
+          v-model="filter.value"
         />
-        <span class="input-group-text btn btn-primary fc-pointer">
-          <i class="bi bi-search"></i>
-        </span>
+        <span class="input-group-text btn btn-primary gd-pointer"
+          ><i class="bi bi-search"></i
+        ></span>
       </div>
-    </div>
 
-    <!-- Categories -->
-    <div class="mt-4">
-      <Transition name="shake2" appear>
-        <h4 class="text-uppercase h6 pb-2">
-          <i :class="state.filters.categories.icon" class="me-2"></i>
-          {{ state.filters.categories.title }}
-        </h4>
-      </Transition>
-      <ul class="list-group item form-check">
-        <li
-          v-for="(item, index) in state.filters.categories.items"
-          :key="index"
-          class="list-group item"
-        >
+      <ul v-if="filter.inputType === 'checkbox'" class="list-group item form-check">
+        <li class="list-group item" v-for="category in filter.items" :key="category.id">
           <div
-            class="list-group-item list-group-item-action fc-pointer mb-1"
-            :class="state.filters.categories.value.includes(item.value) ? 'border-primary' : ''"
+            class="list-group-item list-group-item-action gd-pointer mb-1"
+            :style="`animation-delay: ${1.2 + category.id / 20}s`"
+            :class="
+              filter.value.find((item) => item === category.name) ? 'border-primary-subtle' : ''
+            "
           >
-            <label :for="'category' + item.id" class="form-check">
+            <label class="form-check" :for="`${key}-${category.id}`">
               <input
-                :id="'category' + item.id"
+                :id="`${key}-${category.id}`"
                 class="form-check-input"
-                v-model="state.filters.categories.value"
-                :name="'category' + item.id"
-                :type="state.filters.categories.inputType"
-                :value="item.value"
+                :name="`${key}-${category.id}`"
+                :type="filter.inputType"
+                @change="updateCategoriesValues(category.name, $event)"
               />
-              <span class="form-check-label fs-7">{{ item.name }}</span>
+              <span class="form-check-label fs-7">{{ category.name }}</span>
             </label>
           </div>
         </li>
       </ul>
-    </div>
-
-    <!-- Prices -->
-    <div class="mt-4">
-      <Transition name="shake3" appear>
-        <h4 class="text-uppercase h6 pb-2">
-          <i :class="state.filters.prices.icon" class="me-2"></i>
-          {{ state.filters.prices.title }}
-        </h4>
-      </Transition>
-      <ul class="list-group item form-check">
-        <li
-          v-for="(item, index) in state.filters.prices.items"
-          :key="index"
-          class="list-group item"
-        >
-          <div class="list-group-item list-group-item-action fc-pointer mb-1">
-            <label for="p" class="form-check">
+      <ul v-else-if="filter.inputType === 'radio'" class="list-group item form-check">
+        <li class="list-group item" v-for="price in filter.items" :key="price.id">
+          <div
+            class="list-group-item list-group-item-action gd-pointer mb-1"
+            :class="filter.value === price.value ? 'border-primary-subtle' : ''"
+            :style="`animation-delay: ${1.6 + price.id / 20}s`"
+          >
+            <label class="form-check" :for="`${key}-${price.id}`">
               <input
-                @change="state.filters.prices.value = item.value"
-                id="p-1"
+                :id="`${key}-${price.id}`"
                 class="form-check-input"
-                name="p"
-                v-model="state.filters.prices.value"
-                :type="state.filters.prices.inputType"
-                :value="item.value"
+                :name="`${key}`"
+                type="radio"
+                :value="price.value"
+                :checked="filter.value === price.value"
+                @change="productFilters[key].value = price.value"
               />
-              <span class="form-check-label fs-7">{{ item.name }}</span>
+              <span class="form-check-label fs-7">{{ price.name }}</span>
             </label>
           </div>
         </li>
@@ -116,20 +101,6 @@ const toggleFilter = (): void => {
 </template>
 
 <style scoped lang="scss">
-@import 'animate.css/source/attention_seekers/shakeX.css';
-
-.shake-enter-active {
-  animation: shakeX 2s;
-}
-.shake2-enter-active {
-  animation: shakeX 2s;
-  animation-delay: 0.5s;
-}
-.shake3-enter-active {
-  animation: shakeX 2s;
-  animation-delay: 1s;
-}
-
 .fc-pointer {
   cursor: pointer;
 }
