@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
+import type { productsInterface } from '@/interfaces/product.interface'
+
+defineProps<{
+  dataProduct: productsInterface[]
+}>()
 </script>
 
 <template>
@@ -29,8 +34,10 @@ import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
             <a href="/" class="nav-link">
               <i class="bi bi-cart-check-fill"></i>
               <small
+                v-if="dataProduct.length"
                 class="position-absolute top-0 translate-middle-x m-1 gd-basket-counter badge rounded-pill bg-info"
-              ></small>
+                >{{ dataProduct.length }}</small
+              >
             </a>
           </li>
           <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
@@ -53,4 +60,4 @@ import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
   </header>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss"></style>

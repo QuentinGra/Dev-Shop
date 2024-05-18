@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 
+const userPrefersDark =
+  window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+
+if (userPrefersDark) {
+  document.documentElement.dataset.bsTheme = 'dark'
+} else {
+  document.documentElement.dataset.bsTheme = 'light'
+}
+
 const setTheme = (icon: string): void => {
   if (icon == 'bi-sun-fill') {
     activeIcon.icon = 'bi-sun-fill'
