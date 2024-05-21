@@ -1,3 +1,4 @@
+
 # Utilisation de pnpm pour lancer l'api et le front
 
 ## Installation de pnpm
@@ -29,4 +30,11 @@ pnpm dev
 Ce script va lancer l'api et le front en mode développement.
 
 > Vous pourrez accéder à l'api sur le port [3030](http://localhost:3030/api/v1) et au front sur le port [5173](http://localhost:5173), si ces ports sont disponibles.
+
+# Shop Flashy Coder
+
+## Stack
+- **`Vue`**
+- **`Ts`**
+- **`Scss`**
 
