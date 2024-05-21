@@ -7,6 +7,7 @@ import { ref, watchEffect, type Ref } from 'vue'
 import AdminView from './views/AdminView.vue'
 
 let productForBasket: Ref<productsInterface | null> = ref(null)
+let currentView: Ref<string> = ref('shop')
 
 const basket: Ref<productsInterface[]> = ref([])
 
@@ -16,11 +17,15 @@ const moveProductToBasket = (product: productsInterface): void => {
 watchEffect(() => {
   if (productForBasket.value) basket.value.push(productForBasket.value)
 })
+
+const navigationView = (view: string): void => {
+  currentView.value = view
+}
 </script>
 
 <template>
-  <TheHeader :data-product="basket" />
-  <ShopView v-if="false" @event-add-product-to-basket="moveProductToBasket" />
+  <TheHeader :current-view :data-product="basket" @event-navigation-shop="navigationView" />
+  <ShopView v-if="currentView === 'shop'" @event-add-product-to-basket="moveProductToBasket" />
   <AdminView v-else />
   <TheFooter />
 </template>
