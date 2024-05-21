@@ -1,0 +1,4362 @@
+info:
+  title: DWWM Vue.js API
+  description: >-
+    This API is specifically designed for learning Vue.js as part of the DWWM
+    (Web and Mobile Web Developer) certification program in 2023-2024.<br> It
+    will be primarily used for testing XHR/Fetch requests during the development
+    of a Vue.js application.
+  version: 1.0.0
+  contact:
+    email: contact@gregdesplaces.com
+paths:
+  /api/v1/auth:
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authResult'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Creates a new resource with data.
+      summary: ''
+      tags:
+        - auth
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authRequest'
+    delete:
+      parameters: []
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authResult'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Logout the currently logged in user
+      summary: ''
+      tags:
+        - auth
+      security: []
+  /api/v1/auth/{accessToken}:
+    delete:
+      parameters:
+        - in: path
+          name: accessToken
+          description: accessToken of the currently logged in user
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authResult'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Logout the currently logged in user
+      summary: ''
+      tags:
+        - auth
+      security: []
+  /api/v1/categories:
+    get:
+      parameters:
+        - description: Number of results to return
+          in: query
+          name: $limit
+          schema:
+            type: integer
+        - description: Number of results to skip
+          in: query
+          name: $skip
+          schema:
+            type: integer
+        - description: Query parameters
+          in: query
+          name: filter
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/CategoryQuery'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryPagination'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Retrieves a list of all resources from the service.
+      summary: ''
+      tags:
+        - categories
+      security: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Creates a new resource with data.
+      summary: ''
+      tags:
+        - categories
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryData'
+  /api/v1/categories/{categoryId}:
+    get:
+      parameters:
+        - in: path
+          name: categoryId
+          description: ID of Category to return
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Retrieves a single resource with the given id from the service.
+      summary: ''
+      tags:
+        - categories
+      security: []
+    patch:
+      parameters:
+        - in: path
+          name: categoryId
+          description: ID of Category to update
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+        - categories
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+    delete:
+      parameters:
+        - in: path
+          name: categoryId
+          description: ID of Category to remove
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Removes the resource with id.
+      summary: ''
+      tags:
+        - categories
+      security: []
+  /api/v1/products:
+    get:
+      parameters:
+        - description: Number of results to return
+          in: query
+          name: $limit
+          schema:
+            type: integer
+        - description: Number of results to skip
+          in: query
+          name: $skip
+          schema:
+            type: integer
+        - description: Query parameters
+          in: query
+          name: filter
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/ProductQuery'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPagination'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Retrieves a list of all resources from the service.
+      summary: ''
+      tags:
+        - products
+      security: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Creates a new resource with data.
+      summary: ''
+      tags:
+        - products
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductData'
+  /api/v1/products/{productId}:
+    get:
+      parameters:
+        - in: path
+          name: productId
+          description: ID of Product to return
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Retrieves a single resource with the given id from the service.
+      summary: ''
+      tags:
+        - products
+      security: []
+    patch:
+      parameters:
+        - in: path
+          name: productId
+          description: ID of Product to update
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+        - products
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+    delete:
+      parameters:
+        - in: path
+          name: productId
+          description: ID of Product to remove
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Removes the resource with id.
+      summary: ''
+      tags:
+        - products
+      security: []
+  /api/v1/socials:
+    get:
+      parameters:
+        - description: Number of results to return
+          in: query
+          name: $limit
+          schema:
+            type: integer
+        - description: Number of results to skip
+          in: query
+          name: $skip
+          schema:
+            type: integer
+        - description: Query parameters
+          in: query
+          name: filter
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/SocialQuery'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SocialPagination'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Retrieves a list of all resources from the service.
+      summary: ''
+      tags:
+        - socials
+      security: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Social'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Creates a new resource with data.
+      summary: ''
+      tags:
+        - socials
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SocialData'
+  /api/v1/socials/{socialId}:
+    get:
+      parameters:
+        - in: path
+          name: socialId
+          description: ID of Social to return
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Social'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Retrieves a single resource with the given id from the service.
+      summary: ''
+      tags:
+        - socials
+      security: []
+    patch:
+      parameters:
+        - in: path
+          name: socialId
+          description: ID of Social to update
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Social'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+        - socials
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Social'
+    delete:
+      parameters:
+        - in: path
+          name: socialId
+          description: ID of Social to remove
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Social'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Removes the resource with id.
+      summary: ''
+      tags:
+        - socials
+      security: []
+  /api/v1/users:
+    get:
+      parameters:
+        - description: Number of results to return
+          in: query
+          name: $limit
+          schema:
+            type: integer
+        - description: Number of results to skip
+          in: query
+          name: $skip
+          schema:
+            type: integer
+        - description: Query parameters
+          in: query
+          name: filter
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/UserQuery'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPagination'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Retrieves a list of all resources from the service.
+      summary: ''
+      tags:
+        - users
+      security: []
+    post:
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: not authenticated
+        '500':
+          description: general error
+      description: Creates a new resource with data.
+      summary: ''
+      tags:
+        - users
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserData'
+  /api/v1/users/{userId}:
+    get:
+      parameters:
+        - in: path
+          name: userId
+          description: ID of User to return
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Retrieves a single resource with the given id from the service.
+      summary: ''
+      tags:
+        - users
+      security: []
+    patch:
+      parameters:
+        - in: path
+          name: userId
+          description: ID of User to update
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Updates the resource identified by id using data.
+      summary: ''
+      tags:
+        - users
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+    delete:
+      parameters:
+        - in: path
+          name: userId
+          description: ID of User to remove
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: not authenticated
+        '404':
+          description: not found
+        '500':
+          description: general error
+      description: Removes the resource with id.
+      summary: ''
+      tags:
+        - users
+      security: []
+components:
+  schemas:
+    authRequest:
+      type: object
+      properties:
+        strategy:
+          type: string
+          enum:
+            - local
+            - jwt
+        email:
+          type: string
+        password:
+          type: string
+    authResult:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        authentication:
+          type: object
+          properties:
+            strategy:
+              type: string
+        payload:
+          type: object
+        user:
+          $ref: '#/components/schemas/User'
+    Category:
+      required:
+        - categoryId
+        - name
+        - description
+      type: object
+      properties:
+        categoryId:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+      additionalProperties: false
+    CategoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Category'
+    CategoryData:
+      required:
+        - name
+        - description
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      additionalProperties: false
+    CategoryQuery:
+      type: object
+      properties:
+        $sort:
+          type: object
+          properties:
+            categoryId:
+              maximum: 1
+              minimum: -1
+              type: integer
+            name:
+              maximum: 1
+              minimum: -1
+              type: integer
+            description:
+              maximum: 1
+              minimum: -1
+              type: integer
+          additionalProperties: false
+        $select:
+          maxItems: 3
+          type: array
+          items:
+            enum:
+              - categoryId
+              - name
+              - description
+            type: string
+        $and:
+          type: array
+          items:
+            anyOf:
+              - additionalProperties: false
+                type: object
+                properties:
+                  categoryId:
+                    anyOf:
+                      - type: number
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: number
+                          $gte:
+                            type: number
+                          $lt:
+                            type: number
+                          $lte:
+                            type: number
+                          $ne:
+                            type: number
+                          $in:
+                            type: array
+                            items:
+                              type: number
+                          $nin:
+                            type: array
+                            items:
+                              type: number
+                  name:
+                    anyOf:
+                      - type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: string
+                          $gte:
+                            type: string
+                          $lt:
+                            type: string
+                          $lte:
+                            type: string
+                          $ne:
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              type: string
+                  description:
+                    anyOf:
+                      - type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: string
+                          $gte:
+                            type: string
+                          $lt:
+                            type: string
+                          $lte:
+                            type: string
+                          $ne:
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              type: string
+              - type: object
+                properties:
+                  $or:
+                    type: array
+                    items:
+                      additionalProperties: false
+                      type: object
+                      properties:
+                        categoryId:
+                          anyOf:
+                            - type: number
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: number
+                                $gte:
+                                  type: number
+                                $lt:
+                                  type: number
+                                $lte:
+                                  type: number
+                                $ne:
+                                  type: number
+                                $in:
+                                  type: array
+                                  items:
+                                    type: number
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: number
+                        name:
+                          anyOf:
+                            - type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: string
+                                $gte:
+                                  type: string
+                                $lt:
+                                  type: string
+                                $lte:
+                                  type: string
+                                $ne:
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: string
+                        description:
+                          anyOf:
+                            - type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: string
+                                $gte:
+                                  type: string
+                                $lt:
+                                  type: string
+                                $lte:
+                                  type: string
+                                $ne:
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: string
+                required:
+                  - $or
+        $or:
+          type: array
+          items:
+            type: object
+            properties:
+              categoryId:
+                anyOf:
+                  - type: number
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: number
+                      $gte:
+                        type: number
+                      $lt:
+                        type: number
+                      $lte:
+                        type: number
+                      $ne:
+                        type: number
+                      $in:
+                        type: array
+                        items:
+                          type: number
+                      $nin:
+                        type: array
+                        items:
+                          type: number
+              name:
+                anyOf:
+                  - type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: string
+                      $gte:
+                        type: string
+                      $lt:
+                        type: string
+                      $lte:
+                        type: string
+                      $ne:
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          type: string
+              description:
+                anyOf:
+                  - type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: string
+                      $gte:
+                        type: string
+                      $lt:
+                        type: string
+                      $lte:
+                        type: string
+                      $ne:
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          type: string
+            additionalProperties: false
+        categoryId:
+          anyOf:
+            - type: number
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: number
+                $gte:
+                  type: number
+                $lt:
+                  type: number
+                $lte:
+                  type: number
+                $ne:
+                  type: number
+                $in:
+                  type: array
+                  items:
+                    type: number
+                $nin:
+                  type: array
+                  items:
+                    type: number
+        name:
+          anyOf:
+            - type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: string
+                $gte:
+                  type: string
+                $lt:
+                  type: string
+                $lte:
+                  type: string
+                $ne:
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    type: string
+        description:
+          anyOf:
+            - type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: string
+                $gte:
+                  type: string
+                $lt:
+                  type: string
+                $lte:
+                  type: string
+                $ne:
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    type: string
+      additionalProperties: true
+    CategoryPagination:
+      title: Category pagination result
+      type: object
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        skip:
+          type: integer
+        data:
+          $ref: '#/components/schemas/CategoryList'
+    Product:
+      required:
+        - productId
+        - name
+        - description
+        - price
+        - createdAt
+        - categoryId
+        - category
+      type: object
+      properties:
+        productId:
+          type: number
+        name:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 50
+          type: string
+        price:
+          maximum: 99999.99
+          minimum: 0
+          type: number
+        illustration:
+          maxLength: 50
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        categoryId:
+          type: number
+        category:
+          $ref: '#/components/schemas/Category'
+      additionalProperties: false
+    ProductList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+    ProductData:
+      required:
+        - name
+        - description
+        - price
+        - categoryId
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          type: string
+        description:
+          maxLength: 50
+          type: string
+        price:
+          maximum: 99999.99
+          minimum: 0
+          type: number
+        illustration:
+          maxLength: 50
+          type: string
+        categoryId:
+          type: number
+      additionalProperties: false
+    ProductQuery:
+      type: object
+      properties:
+        $sort:
+          type: object
+          properties:
+            productId:
+              maximum: 1
+              minimum: -1
+              type: integer
+            name:
+              maximum: 1
+              minimum: -1
+              type: integer
+            description:
+              maximum: 1
+              minimum: -1
+              type: integer
+            price:
+              maximum: 1
+              minimum: -1
+              type: integer
+            illustration:
+              maximum: 1
+              minimum: -1
+              type: integer
+          additionalProperties: false
+        $select:
+          maxItems: 5
+          type: array
+          items:
+            enum:
+              - productId
+              - name
+              - description
+              - price
+              - illustration
+            type: string
+        $and:
+          type: array
+          items:
+            anyOf:
+              - additionalProperties: false
+                type: object
+                properties:
+                  productId:
+                    anyOf:
+                      - type: number
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: number
+                          $gte:
+                            type: number
+                          $lt:
+                            type: number
+                          $lte:
+                            type: number
+                          $ne:
+                            type: number
+                          $in:
+                            type: array
+                            items:
+                              type: number
+                          $nin:
+                            type: array
+                            items:
+                              type: number
+                  name:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  description:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  price:
+                    anyOf:
+                      - minimum: 0
+                        maximum: 99999.99
+                        type: number
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            minimum: 0
+                            maximum: 99999.99
+                            type: number
+                          $gte:
+                            minimum: 0
+                            maximum: 99999.99
+                            type: number
+                          $lt:
+                            minimum: 0
+                            maximum: 99999.99
+                            type: number
+                          $lte:
+                            minimum: 0
+                            maximum: 99999.99
+                            type: number
+                          $ne:
+                            minimum: 0
+                            maximum: 99999.99
+                            type: number
+                          $in:
+                            type: array
+                            items:
+                              minimum: 0
+                              maximum: 99999.99
+                              type: number
+                          $nin:
+                            type: array
+                            items:
+                              minimum: 0
+                              maximum: 99999.99
+                              type: number
+                  illustration:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+              - type: object
+                properties:
+                  $or:
+                    type: array
+                    items:
+                      additionalProperties: false
+                      type: object
+                      properties:
+                        productId:
+                          anyOf:
+                            - type: number
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: number
+                                $gte:
+                                  type: number
+                                $lt:
+                                  type: number
+                                $lte:
+                                  type: number
+                                $ne:
+                                  type: number
+                                $in:
+                                  type: array
+                                  items:
+                                    type: number
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: number
+                        name:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        description:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        price:
+                          anyOf:
+                            - minimum: 0
+                              maximum: 99999.99
+                              type: number
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  minimum: 0
+                                  maximum: 99999.99
+                                  type: number
+                                $gte:
+                                  minimum: 0
+                                  maximum: 99999.99
+                                  type: number
+                                $lt:
+                                  minimum: 0
+                                  maximum: 99999.99
+                                  type: number
+                                $lte:
+                                  minimum: 0
+                                  maximum: 99999.99
+                                  type: number
+                                $ne:
+                                  minimum: 0
+                                  maximum: 99999.99
+                                  type: number
+                                $in:
+                                  type: array
+                                  items:
+                                    minimum: 0
+                                    maximum: 99999.99
+                                    type: number
+                                $nin:
+                                  type: array
+                                  items:
+                                    minimum: 0
+                                    maximum: 99999.99
+                                    type: number
+                        illustration:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                required:
+                  - $or
+        $or:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                anyOf:
+                  - type: number
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: number
+                      $gte:
+                        type: number
+                      $lt:
+                        type: number
+                      $lte:
+                        type: number
+                      $ne:
+                        type: number
+                      $in:
+                        type: array
+                        items:
+                          type: number
+                      $nin:
+                        type: array
+                        items:
+                          type: number
+              name:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              description:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              price:
+                anyOf:
+                  - minimum: 0
+                    maximum: 99999.99
+                    type: number
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        minimum: 0
+                        maximum: 99999.99
+                        type: number
+                      $gte:
+                        minimum: 0
+                        maximum: 99999.99
+                        type: number
+                      $lt:
+                        minimum: 0
+                        maximum: 99999.99
+                        type: number
+                      $lte:
+                        minimum: 0
+                        maximum: 99999.99
+                        type: number
+                      $ne:
+                        minimum: 0
+                        maximum: 99999.99
+                        type: number
+                      $in:
+                        type: array
+                        items:
+                          minimum: 0
+                          maximum: 99999.99
+                          type: number
+                      $nin:
+                        type: array
+                        items:
+                          minimum: 0
+                          maximum: 99999.99
+                          type: number
+              illustration:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+            additionalProperties: false
+        productId:
+          anyOf:
+            - type: number
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: number
+                $gte:
+                  type: number
+                $lt:
+                  type: number
+                $lte:
+                  type: number
+                $ne:
+                  type: number
+                $in:
+                  type: array
+                  items:
+                    type: number
+                $nin:
+                  type: array
+                  items:
+                    type: number
+        name:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        description:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        price:
+          anyOf:
+            - minimum: 0
+              maximum: 99999.99
+              type: number
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  minimum: 0
+                  maximum: 99999.99
+                  type: number
+                $gte:
+                  minimum: 0
+                  maximum: 99999.99
+                  type: number
+                $lt:
+                  minimum: 0
+                  maximum: 99999.99
+                  type: number
+                $lte:
+                  minimum: 0
+                  maximum: 99999.99
+                  type: number
+                $ne:
+                  minimum: 0
+                  maximum: 99999.99
+                  type: number
+                $in:
+                  type: array
+                  items:
+                    minimum: 0
+                    maximum: 99999.99
+                    type: number
+                $nin:
+                  type: array
+                  items:
+                    minimum: 0
+                    maximum: 99999.99
+                    type: number
+        illustration:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+      additionalProperties: false
+    ProductPagination:
+      title: Product pagination result
+      type: object
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        skip:
+          type: integer
+        data:
+          $ref: '#/components/schemas/ProductList'
+    Social:
+      required:
+        - socialId
+        - name
+        - url
+        - userId
+      type: object
+      properties:
+        socialId:
+          type: number
+        name:
+          enum:
+            - facebook
+            - x
+            - instagram
+            - linkedin
+            - github
+          type: string
+        url:
+          maxLength: 50
+          type: string
+        userId:
+          type: number
+      additionalProperties: false
+    SocialList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Social'
+    SocialData:
+      required:
+        - name
+        - url
+      type: object
+      properties:
+        name:
+          enum:
+            - facebook
+            - x
+            - instagram
+            - linkedin
+            - github
+          type: string
+        url:
+          maxLength: 50
+          type: string
+      additionalProperties: false
+    SocialQuery:
+      type: object
+      properties:
+        $sort:
+          type: object
+          properties:
+            socialId:
+              maximum: 1
+              minimum: -1
+              type: integer
+            name:
+              maximum: 1
+              minimum: -1
+              type: integer
+            url:
+              maximum: 1
+              minimum: -1
+              type: integer
+            userId:
+              maximum: 1
+              minimum: -1
+              type: integer
+          additionalProperties: false
+        $select:
+          maxItems: 4
+          type: array
+          items:
+            enum:
+              - socialId
+              - name
+              - url
+              - userId
+            type: string
+        $and:
+          type: array
+          items:
+            anyOf:
+              - additionalProperties: false
+                type: object
+                properties:
+                  socialId:
+                    anyOf:
+                      - type: number
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: number
+                          $gte:
+                            type: number
+                          $lt:
+                            type: number
+                          $lte:
+                            type: number
+                          $ne:
+                            type: number
+                          $in:
+                            type: array
+                            items:
+                              type: number
+                          $nin:
+                            type: array
+                            items:
+                              type: number
+                  name:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - facebook
+                          - x
+                          - instagram
+                          - linkedin
+                          - github
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: string
+                            enum:
+                              - facebook
+                              - x
+                              - instagram
+                              - linkedin
+                              - github
+                          $gte:
+                            type: string
+                            enum:
+                              - facebook
+                              - x
+                              - instagram
+                              - linkedin
+                              - github
+                          $lt:
+                            type: string
+                            enum:
+                              - facebook
+                              - x
+                              - instagram
+                              - linkedin
+                              - github
+                          $lte:
+                            type: string
+                            enum:
+                              - facebook
+                              - x
+                              - instagram
+                              - linkedin
+                              - github
+                          $ne:
+                            type: string
+                            enum:
+                              - facebook
+                              - x
+                              - instagram
+                              - linkedin
+                              - github
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                                - facebook
+                                - x
+                                - instagram
+                                - linkedin
+                                - github
+                          $nin:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                                - facebook
+                                - x
+                                - instagram
+                                - linkedin
+                                - github
+                  url:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  userId:
+                    anyOf:
+                      - type: number
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: number
+                          $gte:
+                            type: number
+                          $lt:
+                            type: number
+                          $lte:
+                            type: number
+                          $ne:
+                            type: number
+                          $in:
+                            type: array
+                            items:
+                              type: number
+                          $nin:
+                            type: array
+                            items:
+                              type: number
+              - type: object
+                properties:
+                  $or:
+                    type: array
+                    items:
+                      additionalProperties: false
+                      type: object
+                      properties:
+                        socialId:
+                          anyOf:
+                            - type: number
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: number
+                                $gte:
+                                  type: number
+                                $lt:
+                                  type: number
+                                $lte:
+                                  type: number
+                                $ne:
+                                  type: number
+                                $in:
+                                  type: array
+                                  items:
+                                    type: number
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: number
+                        name:
+                          anyOf:
+                            - type: string
+                              enum:
+                                - facebook
+                                - x
+                                - instagram
+                                - linkedin
+                                - github
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: string
+                                  enum:
+                                    - facebook
+                                    - x
+                                    - instagram
+                                    - linkedin
+                                    - github
+                                $gte:
+                                  type: string
+                                  enum:
+                                    - facebook
+                                    - x
+                                    - instagram
+                                    - linkedin
+                                    - github
+                                $lt:
+                                  type: string
+                                  enum:
+                                    - facebook
+                                    - x
+                                    - instagram
+                                    - linkedin
+                                    - github
+                                $lte:
+                                  type: string
+                                  enum:
+                                    - facebook
+                                    - x
+                                    - instagram
+                                    - linkedin
+                                    - github
+                                $ne:
+                                  type: string
+                                  enum:
+                                    - facebook
+                                    - x
+                                    - instagram
+                                    - linkedin
+                                    - github
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                      - facebook
+                                      - x
+                                      - instagram
+                                      - linkedin
+                                      - github
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                      - facebook
+                                      - x
+                                      - instagram
+                                      - linkedin
+                                      - github
+                        url:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        userId:
+                          anyOf:
+                            - type: number
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: number
+                                $gte:
+                                  type: number
+                                $lt:
+                                  type: number
+                                $lte:
+                                  type: number
+                                $ne:
+                                  type: number
+                                $in:
+                                  type: array
+                                  items:
+                                    type: number
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: number
+                required:
+                  - $or
+        $or:
+          type: array
+          items:
+            type: object
+            properties:
+              socialId:
+                anyOf:
+                  - type: number
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: number
+                      $gte:
+                        type: number
+                      $lt:
+                        type: number
+                      $lte:
+                        type: number
+                      $ne:
+                        type: number
+                      $in:
+                        type: array
+                        items:
+                          type: number
+                      $nin:
+                        type: array
+                        items:
+                          type: number
+              name:
+                anyOf:
+                  - type: string
+                    enum:
+                      - facebook
+                      - x
+                      - instagram
+                      - linkedin
+                      - github
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: string
+                        enum:
+                          - facebook
+                          - x
+                          - instagram
+                          - linkedin
+                          - github
+                      $gte:
+                        type: string
+                        enum:
+                          - facebook
+                          - x
+                          - instagram
+                          - linkedin
+                          - github
+                      $lt:
+                        type: string
+                        enum:
+                          - facebook
+                          - x
+                          - instagram
+                          - linkedin
+                          - github
+                      $lte:
+                        type: string
+                        enum:
+                          - facebook
+                          - x
+                          - instagram
+                          - linkedin
+                          - github
+                      $ne:
+                        type: string
+                        enum:
+                          - facebook
+                          - x
+                          - instagram
+                          - linkedin
+                          - github
+                      $in:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                            - facebook
+                            - x
+                            - instagram
+                            - linkedin
+                            - github
+                      $nin:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                            - facebook
+                            - x
+                            - instagram
+                            - linkedin
+                            - github
+              url:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              userId:
+                anyOf:
+                  - type: number
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: number
+                      $gte:
+                        type: number
+                      $lt:
+                        type: number
+                      $lte:
+                        type: number
+                      $ne:
+                        type: number
+                      $in:
+                        type: array
+                        items:
+                          type: number
+                      $nin:
+                        type: array
+                        items:
+                          type: number
+            additionalProperties: false
+        socialId:
+          anyOf:
+            - type: number
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: number
+                $gte:
+                  type: number
+                $lt:
+                  type: number
+                $lte:
+                  type: number
+                $ne:
+                  type: number
+                $in:
+                  type: array
+                  items:
+                    type: number
+                $nin:
+                  type: array
+                  items:
+                    type: number
+        name:
+          anyOf:
+            - type: string
+              enum:
+                - facebook
+                - x
+                - instagram
+                - linkedin
+                - github
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: string
+                  enum:
+                    - facebook
+                    - x
+                    - instagram
+                    - linkedin
+                    - github
+                $gte:
+                  type: string
+                  enum:
+                    - facebook
+                    - x
+                    - instagram
+                    - linkedin
+                    - github
+                $lt:
+                  type: string
+                  enum:
+                    - facebook
+                    - x
+                    - instagram
+                    - linkedin
+                    - github
+                $lte:
+                  type: string
+                  enum:
+                    - facebook
+                    - x
+                    - instagram
+                    - linkedin
+                    - github
+                $ne:
+                  type: string
+                  enum:
+                    - facebook
+                    - x
+                    - instagram
+                    - linkedin
+                    - github
+                $in:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - facebook
+                      - x
+                      - instagram
+                      - linkedin
+                      - github
+                $nin:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - facebook
+                      - x
+                      - instagram
+                      - linkedin
+                      - github
+        url:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        userId:
+          anyOf:
+            - type: number
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: number
+                $gte:
+                  type: number
+                $lt:
+                  type: number
+                $lte:
+                  type: number
+                $ne:
+                  type: number
+                $in:
+                  type: array
+                  items:
+                    type: number
+                $nin:
+                  type: array
+                  items:
+                    type: number
+      additionalProperties: false
+    SocialPagination:
+      title: Social pagination result
+      type: object
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        skip:
+          type: integer
+        data:
+          $ref: '#/components/schemas/SocialList'
+    User:
+      required:
+        - userId
+        - email
+        - password
+        - firstname
+        - lastname
+        - createdAt
+        - socials
+      type: object
+      properties:
+        userId:
+          type: number
+        email:
+          maxLength: 50
+          type: string
+        password:
+          maxLength: 50
+          type: string
+        firstname:
+          maxLength: 50
+          type: string
+        lastname:
+          maxLength: 50
+          type: string
+        avatarSrc:
+          maxLength: 50
+          type: string
+        phone:
+          maxLength: 10
+          type: string
+        address:
+          maxLength: 50
+          type: string
+        zip:
+          maxLength: 5
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        permissions:
+          enum:
+            - admin
+            - user
+          type: string
+        socials:
+          type: array
+          items:
+            $ref: '#/components/schemas/Social'
+      additionalProperties: false
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    UserData:
+      required:
+        - email
+        - password
+        - firstname
+        - lastname
+      type: object
+      properties:
+        email:
+          maxLength: 50
+          type: string
+        password:
+          maxLength: 50
+          type: string
+        firstname:
+          maxLength: 50
+          type: string
+        lastname:
+          maxLength: 50
+          type: string
+        avatarSrc:
+          maxLength: 50
+          type: string
+        phone:
+          maxLength: 10
+          type: string
+        address:
+          maxLength: 50
+          type: string
+        zip:
+          maxLength: 5
+          type: string
+        city:
+          maxLength: 50
+          type: string
+        permissions:
+          enum:
+            - admin
+            - user
+          type: string
+      additionalProperties: false
+    UserQuery:
+      type: object
+      properties:
+        $sort:
+          type: object
+          properties:
+            userId:
+              maximum: 1
+              minimum: -1
+              type: integer
+            email:
+              maximum: 1
+              minimum: -1
+              type: integer
+            firstname:
+              maximum: 1
+              minimum: -1
+              type: integer
+            lastname:
+              maximum: 1
+              minimum: -1
+              type: integer
+            avatarSrc:
+              maximum: 1
+              minimum: -1
+              type: integer
+            phone:
+              maximum: 1
+              minimum: -1
+              type: integer
+            address:
+              maximum: 1
+              minimum: -1
+              type: integer
+            zip:
+              maximum: 1
+              minimum: -1
+              type: integer
+            city:
+              maximum: 1
+              minimum: -1
+              type: integer
+            createdAt:
+              maximum: 1
+              minimum: -1
+              type: integer
+            updatedAt:
+              maximum: 1
+              minimum: -1
+              type: integer
+            permissions:
+              maximum: 1
+              minimum: -1
+              type: integer
+          additionalProperties: false
+        $select:
+          maxItems: 12
+          type: array
+          items:
+            enum:
+              - userId
+              - email
+              - firstname
+              - lastname
+              - avatarSrc
+              - phone
+              - address
+              - zip
+              - city
+              - createdAt
+              - updatedAt
+              - permissions
+            type: string
+        $and:
+          type: array
+          items:
+            anyOf:
+              - additionalProperties: false
+                type: object
+                properties:
+                  userId:
+                    anyOf:
+                      - type: number
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: number
+                          $gte:
+                            type: number
+                          $lt:
+                            type: number
+                          $lte:
+                            type: number
+                          $ne:
+                            type: number
+                          $in:
+                            type: array
+                            items:
+                              type: number
+                          $nin:
+                            type: array
+                            items:
+                              type: number
+                  email:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  firstname:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  lastname:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  avatarSrc:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  phone:
+                    anyOf:
+                      - maxLength: 10
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 10
+                            type: string
+                          $gte:
+                            maxLength: 10
+                            type: string
+                          $lt:
+                            maxLength: 10
+                            type: string
+                          $lte:
+                            maxLength: 10
+                            type: string
+                          $ne:
+                            maxLength: 10
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 10
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 10
+                              type: string
+                  address:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  zip:
+                    anyOf:
+                      - maxLength: 5
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 5
+                            type: string
+                          $gte:
+                            maxLength: 5
+                            type: string
+                          $lt:
+                            maxLength: 5
+                            type: string
+                          $lte:
+                            maxLength: 5
+                            type: string
+                          $ne:
+                            maxLength: 5
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 5
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 5
+                              type: string
+                  city:
+                    anyOf:
+                      - maxLength: 50
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            maxLength: 50
+                            type: string
+                          $gte:
+                            maxLength: 50
+                            type: string
+                          $lt:
+                            maxLength: 50
+                            type: string
+                          $lte:
+                            maxLength: 50
+                            type: string
+                          $ne:
+                            maxLength: 50
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              maxLength: 50
+                              type: string
+                  createdAt:
+                    anyOf:
+                      - format: date-time
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            format: date-time
+                            type: string
+                          $gte:
+                            format: date-time
+                            type: string
+                          $lt:
+                            format: date-time
+                            type: string
+                          $lte:
+                            format: date-time
+                            type: string
+                          $ne:
+                            format: date-time
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              format: date-time
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              format: date-time
+                              type: string
+                  updatedAt:
+                    anyOf:
+                      - format: date-time
+                        type: string
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            format: date-time
+                            type: string
+                          $gte:
+                            format: date-time
+                            type: string
+                          $lt:
+                            format: date-time
+                            type: string
+                          $lte:
+                            format: date-time
+                            type: string
+                          $ne:
+                            format: date-time
+                            type: string
+                          $in:
+                            type: array
+                            items:
+                              format: date-time
+                              type: string
+                          $nin:
+                            type: array
+                            items:
+                              format: date-time
+                              type: string
+                  permissions:
+                    anyOf:
+                      - type: string
+                        enum:
+                          - admin
+                          - user
+                      - additionalProperties: false
+                        type: object
+                        properties:
+                          $gt:
+                            type: string
+                            enum:
+                              - admin
+                              - user
+                          $gte:
+                            type: string
+                            enum:
+                              - admin
+                              - user
+                          $lt:
+                            type: string
+                            enum:
+                              - admin
+                              - user
+                          $lte:
+                            type: string
+                            enum:
+                              - admin
+                              - user
+                          $ne:
+                            type: string
+                            enum:
+                              - admin
+                              - user
+                          $in:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                                - admin
+                                - user
+                          $nin:
+                            type: array
+                            items:
+                              type: string
+                              enum:
+                                - admin
+                                - user
+              - type: object
+                properties:
+                  $or:
+                    type: array
+                    items:
+                      additionalProperties: false
+                      type: object
+                      properties:
+                        userId:
+                          anyOf:
+                            - type: number
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: number
+                                $gte:
+                                  type: number
+                                $lt:
+                                  type: number
+                                $lte:
+                                  type: number
+                                $ne:
+                                  type: number
+                                $in:
+                                  type: array
+                                  items:
+                                    type: number
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: number
+                        email:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        firstname:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        lastname:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        avatarSrc:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        phone:
+                          anyOf:
+                            - maxLength: 10
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 10
+                                  type: string
+                                $gte:
+                                  maxLength: 10
+                                  type: string
+                                $lt:
+                                  maxLength: 10
+                                  type: string
+                                $lte:
+                                  maxLength: 10
+                                  type: string
+                                $ne:
+                                  maxLength: 10
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 10
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 10
+                                    type: string
+                        address:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        zip:
+                          anyOf:
+                            - maxLength: 5
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 5
+                                  type: string
+                                $gte:
+                                  maxLength: 5
+                                  type: string
+                                $lt:
+                                  maxLength: 5
+                                  type: string
+                                $lte:
+                                  maxLength: 5
+                                  type: string
+                                $ne:
+                                  maxLength: 5
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 5
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 5
+                                    type: string
+                        city:
+                          anyOf:
+                            - maxLength: 50
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  maxLength: 50
+                                  type: string
+                                $gte:
+                                  maxLength: 50
+                                  type: string
+                                $lt:
+                                  maxLength: 50
+                                  type: string
+                                $lte:
+                                  maxLength: 50
+                                  type: string
+                                $ne:
+                                  maxLength: 50
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    maxLength: 50
+                                    type: string
+                        createdAt:
+                          anyOf:
+                            - format: date-time
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  format: date-time
+                                  type: string
+                                $gte:
+                                  format: date-time
+                                  type: string
+                                $lt:
+                                  format: date-time
+                                  type: string
+                                $lte:
+                                  format: date-time
+                                  type: string
+                                $ne:
+                                  format: date-time
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    format: date-time
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    format: date-time
+                                    type: string
+                        updatedAt:
+                          anyOf:
+                            - format: date-time
+                              type: string
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  format: date-time
+                                  type: string
+                                $gte:
+                                  format: date-time
+                                  type: string
+                                $lt:
+                                  format: date-time
+                                  type: string
+                                $lte:
+                                  format: date-time
+                                  type: string
+                                $ne:
+                                  format: date-time
+                                  type: string
+                                $in:
+                                  type: array
+                                  items:
+                                    format: date-time
+                                    type: string
+                                $nin:
+                                  type: array
+                                  items:
+                                    format: date-time
+                                    type: string
+                        permissions:
+                          anyOf:
+                            - type: string
+                              enum:
+                                - admin
+                                - user
+                            - additionalProperties: false
+                              type: object
+                              properties:
+                                $gt:
+                                  type: string
+                                  enum:
+                                    - admin
+                                    - user
+                                $gte:
+                                  type: string
+                                  enum:
+                                    - admin
+                                    - user
+                                $lt:
+                                  type: string
+                                  enum:
+                                    - admin
+                                    - user
+                                $lte:
+                                  type: string
+                                  enum:
+                                    - admin
+                                    - user
+                                $ne:
+                                  type: string
+                                  enum:
+                                    - admin
+                                    - user
+                                $in:
+                                  type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                      - admin
+                                      - user
+                                $nin:
+                                  type: array
+                                  items:
+                                    type: string
+                                    enum:
+                                      - admin
+                                      - user
+                required:
+                  - $or
+        $or:
+          type: array
+          items:
+            type: object
+            properties:
+              userId:
+                anyOf:
+                  - type: number
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: number
+                      $gte:
+                        type: number
+                      $lt:
+                        type: number
+                      $lte:
+                        type: number
+                      $ne:
+                        type: number
+                      $in:
+                        type: array
+                        items:
+                          type: number
+                      $nin:
+                        type: array
+                        items:
+                          type: number
+              email:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              firstname:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              lastname:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              avatarSrc:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              phone:
+                anyOf:
+                  - maxLength: 10
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 10
+                        type: string
+                      $gte:
+                        maxLength: 10
+                        type: string
+                      $lt:
+                        maxLength: 10
+                        type: string
+                      $lte:
+                        maxLength: 10
+                        type: string
+                      $ne:
+                        maxLength: 10
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 10
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 10
+                          type: string
+              address:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              zip:
+                anyOf:
+                  - maxLength: 5
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 5
+                        type: string
+                      $gte:
+                        maxLength: 5
+                        type: string
+                      $lt:
+                        maxLength: 5
+                        type: string
+                      $lte:
+                        maxLength: 5
+                        type: string
+                      $ne:
+                        maxLength: 5
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 5
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 5
+                          type: string
+              city:
+                anyOf:
+                  - maxLength: 50
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        maxLength: 50
+                        type: string
+                      $gte:
+                        maxLength: 50
+                        type: string
+                      $lt:
+                        maxLength: 50
+                        type: string
+                      $lte:
+                        maxLength: 50
+                        type: string
+                      $ne:
+                        maxLength: 50
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          maxLength: 50
+                          type: string
+              createdAt:
+                anyOf:
+                  - format: date-time
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        format: date-time
+                        type: string
+                      $gte:
+                        format: date-time
+                        type: string
+                      $lt:
+                        format: date-time
+                        type: string
+                      $lte:
+                        format: date-time
+                        type: string
+                      $ne:
+                        format: date-time
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          format: date-time
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          format: date-time
+                          type: string
+              updatedAt:
+                anyOf:
+                  - format: date-time
+                    type: string
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        format: date-time
+                        type: string
+                      $gte:
+                        format: date-time
+                        type: string
+                      $lt:
+                        format: date-time
+                        type: string
+                      $lte:
+                        format: date-time
+                        type: string
+                      $ne:
+                        format: date-time
+                        type: string
+                      $in:
+                        type: array
+                        items:
+                          format: date-time
+                          type: string
+                      $nin:
+                        type: array
+                        items:
+                          format: date-time
+                          type: string
+              permissions:
+                anyOf:
+                  - type: string
+                    enum:
+                      - admin
+                      - user
+                  - additionalProperties: false
+                    type: object
+                    properties:
+                      $gt:
+                        type: string
+                        enum:
+                          - admin
+                          - user
+                      $gte:
+                        type: string
+                        enum:
+                          - admin
+                          - user
+                      $lt:
+                        type: string
+                        enum:
+                          - admin
+                          - user
+                      $lte:
+                        type: string
+                        enum:
+                          - admin
+                          - user
+                      $ne:
+                        type: string
+                        enum:
+                          - admin
+                          - user
+                      $in:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                            - admin
+                            - user
+                      $nin:
+                        type: array
+                        items:
+                          type: string
+                          enum:
+                            - admin
+                            - user
+            additionalProperties: false
+        userId:
+          anyOf:
+            - type: number
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: number
+                $gte:
+                  type: number
+                $lt:
+                  type: number
+                $lte:
+                  type: number
+                $ne:
+                  type: number
+                $in:
+                  type: array
+                  items:
+                    type: number
+                $nin:
+                  type: array
+                  items:
+                    type: number
+        email:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        firstname:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        lastname:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        avatarSrc:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        phone:
+          anyOf:
+            - maxLength: 10
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 10
+                  type: string
+                $gte:
+                  maxLength: 10
+                  type: string
+                $lt:
+                  maxLength: 10
+                  type: string
+                $lte:
+                  maxLength: 10
+                  type: string
+                $ne:
+                  maxLength: 10
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 10
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 10
+                    type: string
+        address:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        zip:
+          anyOf:
+            - maxLength: 5
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 5
+                  type: string
+                $gte:
+                  maxLength: 5
+                  type: string
+                $lt:
+                  maxLength: 5
+                  type: string
+                $lte:
+                  maxLength: 5
+                  type: string
+                $ne:
+                  maxLength: 5
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 5
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 5
+                    type: string
+        city:
+          anyOf:
+            - maxLength: 50
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  maxLength: 50
+                  type: string
+                $gte:
+                  maxLength: 50
+                  type: string
+                $lt:
+                  maxLength: 50
+                  type: string
+                $lte:
+                  maxLength: 50
+                  type: string
+                $ne:
+                  maxLength: 50
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    maxLength: 50
+                    type: string
+        createdAt:
+          anyOf:
+            - format: date-time
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  format: date-time
+                  type: string
+                $gte:
+                  format: date-time
+                  type: string
+                $lt:
+                  format: date-time
+                  type: string
+                $lte:
+                  format: date-time
+                  type: string
+                $ne:
+                  format: date-time
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    format: date-time
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    format: date-time
+                    type: string
+        updatedAt:
+          anyOf:
+            - format: date-time
+              type: string
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  format: date-time
+                  type: string
+                $gte:
+                  format: date-time
+                  type: string
+                $lt:
+                  format: date-time
+                  type: string
+                $lte:
+                  format: date-time
+                  type: string
+                $ne:
+                  format: date-time
+                  type: string
+                $in:
+                  type: array
+                  items:
+                    format: date-time
+                    type: string
+                $nin:
+                  type: array
+                  items:
+                    format: date-time
+                    type: string
+        permissions:
+          anyOf:
+            - type: string
+              enum:
+                - admin
+                - user
+            - additionalProperties: false
+              type: object
+              properties:
+                $gt:
+                  type: string
+                  enum:
+                    - admin
+                    - user
+                $gte:
+                  type: string
+                  enum:
+                    - admin
+                    - user
+                $lt:
+                  type: string
+                  enum:
+                    - admin
+                    - user
+                $lte:
+                  type: string
+                  enum:
+                    - admin
+                    - user
+                $ne:
+                  type: string
+                  enum:
+                    - admin
+                    - user
+                $in:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - admin
+                      - user
+                $nin:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - admin
+                      - user
+      additionalProperties: false
+    UserPagination:
+      title: User pagination result
+      type: object
+      properties:
+        total:
+          type: integer
+        limit:
+          type: integer
+        skip:
+          type: integer
+        data:
+          $ref: '#/components/schemas/UserList'
+openapi: 3.0.3
+tags:
+  - name: auth
+    description: Authentication service to get access tokens and logout users.
+  - name: categories
+    description: The category service to organize products.
+  - name: products
+    description: The product network service linked to one category.
+  - name: socials
+    description: The social network service linked to an user.
+  - name: users
+    description: The user service allows you to create and manage users.
