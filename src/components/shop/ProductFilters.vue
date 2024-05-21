@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { filtersInterface } from '@/interfaces/filters.interface'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps<{
   visibility: boolean
@@ -26,6 +27,14 @@ const updateCategoriesValues = (value: string, e: Event) => {
     )
   }
 }
+
+const searchInput = ref<null | HTMLInputElement>(null)
+
+onMounted(() => {
+  if (searchInput.value) {
+    searchInput.value[0].focus()
+  }
+})
 </script>
 
 <template>
@@ -40,8 +49,10 @@ const updateCategoriesValues = (value: string, e: Event) => {
       <h4 class="text-uppercase h6 pb-2">
         <i class="bi me-2" :class="filter.icon"></i>{{ filter.title }}
       </h4>
+
       <div v-if="filter.title === 'Rechercher'" class="input-group mb-3">
         <input
+          ref="searchInput"
           :type="filter.inputType"
           class="form-control fs-7"
           :class="filter.value ? 'border border-primary-subtle' : ''"
@@ -74,6 +85,7 @@ const updateCategoriesValues = (value: string, e: Event) => {
           </div>
         </li>
       </ul>
+
       <ul v-else-if="filter.inputType === 'radio'" class="list-group item form-check">
         <li class="list-group item" v-for="price in filter.items" :key="price.id">
           <div
