@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Clavier arc-en-ciel",
+    "description": "Un clavier mécanique avec des touches qui changent de couleur à chaque pression.",
+    "price": 150,
+    "illustration": "rainbow_keyboard.jpg",
+    "categoryId": 1
+  },
+  {
+    "name": "Souris volante",
+    "description": "Une souris d'ordinateur qui flotte dans les airs grâce à la lévitation magnétique.",
+    "price": 200,
+    "illustration": "flying_mouse.jpg",
+    "categoryId": 2
+  },
+  {
+    "name": "Tasse à café programmable",
+    "description": "Une tasse à café qui affiche des messages programmables en utilisant la chaleur du café.",
+    "price": 50,
+    "illustration": "programmable_coffee_mug.jpg",
+    "categoryId": 3
+  },
+  {
+    "name": "Casque de réalité virtuelle pour codage",
+    "description": "Un casque de réalité virtuelle qui vous permet de coder dans un environnement 3D immersif.",
+    "price": 500,
+    "illustration": "vr_coding_headset.jpg",
+    "categoryId": 2
+  },
+  {
+    "name": "Lampe de bureau à LED programmable",
+    "description": "Une lampe de bureau qui affiche des animations en LED programmables pour égayer votre espace de travail.",
+    "price": 80,
+    "illustration": "programmable_led_lamp.jpg",
+    "categoryId": 1
+  },
+  {
+    "name": "Drone livreur de café",
+    "description": "Un drone miniature qui vous livre votre café directement à votre bureau. Plus besoin de faire une pause café !",
+    "price": 300,
+    "illustration": "coffee_drone.jpg",
+    "categoryId": 3
+  },
+  {
+    "name": "Clavier holographique",
+    "description": "Un clavier qui projette des touches holographiques. Tapez dans l'air comme si vous aviez un clavier physique.",
+    "price": 250,
+    "illustration": "holographic_keyboard.jpg",
+    "categoryId": 2
+  },
+  {
+    "name": "Tapis de souris chauffant",
+    "description": "Un tapis de souris qui chauffe pour garder votre main au chaud pendant que vous codez.",
+    "price": 30,
+    "illustration": "heating_mouse_pad.jpg",
+    "categoryId": 3
+  },
+  {
+    "name": "Ecran transparent",
+    "description": "Un écran d'ordinateur transparent qui vous permet de voir ce qui se passe derrière tout en travaillant.",
+    "price": 600,
+    "illustration": "transparent_screen.jpg",
+    "categoryId": 2
+  },
+  {
+    "name": "Lunettes de codage",
+    "description": "Des lunettes qui projettent votre code devant vos yeux, vous permettant de coder n'importe où, n'importe quand.",
+    "price": 400,
+    "illustration": "coding_glasses.jpg",
+    "categoryId": 2
+  }
+]
