@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TheHeader from '@/components/TheHeader.vue'
-import TheHome from '@/components/TheHome.vue'
+import ShopView from '@/components/ShopView.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import type { productsInterface } from './interfaces/product.interface'
 import { ref, watchEffect, type Ref } from 'vue'
@@ -19,7 +19,7 @@ watchEffect(() => {
 
 <template>
   <TheHeader :data-product="basket" />
-  <TheHome @event-add-product-to-basket="moveProductToBasket" />
+  <ShopView @event-add-product-to-basket="moveProductToBasket" />
   <TheFooter />
 </template>
 
