@@ -9,12 +9,9 @@ import type { FormInterface } from '@/interfaces/productForm.interface'
 import categories from '@/data/categories.json'
 
 const myValidationSchema = z.object({
-  name: z.string().min(5, { message: 'Le nom doit contenir au moins 5 caractères' }),
-  price: z.number().min(1, { message: 'Entrez un nombre égale ou supérieur à 1' }),
-  illustration: z
-    .string()
-    .url()
-    .regex(/\.(jpg|png)$/),
+  name: z.string().min(5, { message: 'Le nom doit contenir au moins 5 caractères' }).max(100),
+  price: z.number().min(10, { message: 'Entrez un nombre égale ou supérieur à 10' }).max(1000),
+  illustration: z.string().regex(/^(http(s)?:\/\/)[a-zA-Z0-9\-_.,/+]+(\.(png|jp(e)?g))$/),
   categoryId: z.number(),
   description: z
     .string()
