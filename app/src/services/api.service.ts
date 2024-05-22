@@ -7,10 +7,10 @@ export const getProducts = async (): Promise<productsInterface[]> => {
     if (!response.ok || response.status !== 200) {
       throw new Error(`Il y a un problème dans l'url erreur:${response.status}`)
     }
-    const dataParsed: { data: productsInterface[] } = await response.json()
-    return dataParsed.data
-  } catch (error) {
-    console.log(error)
+    const data: { data: productsInterface[] } = await response.json()
+    return data.data
+  } catch (e) {
+    console.log(e)
   }
 }
 
@@ -20,8 +20,8 @@ export const getCategories = async (): Promise<category[]> => {
     if (!response.ok || response.status !== 200) {
       throw new Error(`Il y a un problème dans l'url erreur:${response.status}`)
     }
-    const dataParsed: { data: category[] } = await response.json()
-    return dataParsed.data
+    const data: { data: category[] } = await response.json()
+    return data.data
   } catch (error) {
     console.log(error)
   }
@@ -35,5 +35,5 @@ export const addProducts = async (product: FormInterface): Promise<FormInterface
         },
         body: JSON.stringify(product),
     });
-    return await response.json()
+    return response.json()
 }

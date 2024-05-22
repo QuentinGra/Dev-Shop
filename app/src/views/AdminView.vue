@@ -21,7 +21,10 @@ onMounted(async () => (state.categories = await getCategories()))
 const myValidationSchema = z.object({
   name: z.string().min(5, { message: 'Le nom doit contenir au moins 5 caractères' }).max(100),
   price: z.number().min(10, { message: 'Entrez un nombre égale ou supérieur à 10' }).max(1000),
-  illustration: z.string().regex(/^(http(s)?:\/\/)[a-zA-Z0-9\-_.,/+]+(\.(png|jp(e)?g))$/),
+  illustration: z
+    .string()
+    .regex(/^(http(s)?:\/\/)[a-zA-Z0-9\-_.,/+]+(\.(png|jp(e)?g))$/)
+    .max(500),
   categoryId: z.number(),
   description: z
     .string()
