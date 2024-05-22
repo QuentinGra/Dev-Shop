@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import { reactive, computed, ref, type Ref } from 'vue'
+import { reactive, computed, ref, type Ref, onMounted } from 'vue'
 import ProductList from '@/components/shop/ProductList.vue'
 import ProductFilters from '@/components/shop/ProductFilters.vue'
-import products from '@/data/products.json'
 import type { productsInterface } from '@/interfaces/product.interface'
 import { INITIALS_FILTERS } from '@/data/filters.data'
+import type { filtersInterface } from '@/interfaces/filters.interface'
+import { getProducts } from '@/services/api.service'
 
-const state = reactive({
-  filters: INITIALS_FILTERS
+const state = reactive<{
+  filters: filtersInterface
+  products: productsInterface[]
+}>({
+  filters: INITIALS_FILTERS,
+  products: []
 })
 
+onMounted(async () => (state.products = await getProducts()))
+
 const updateFiltersProducts = computed((): productsInterface[] => {
-  return products.filter((product: productsInterface) => {
+  return state.products.filter((product: productsInterface) => {
     const searchValue: string = state.filters.search.value.toLowerCase()
     const categoryValue: string[] = state.filters.categories.value
     const priceValue: string = state.filters.prices.value

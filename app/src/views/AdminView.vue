@@ -6,7 +6,17 @@ import { zodI18nMap } from 'zod-i18n-map'
 import i18next from 'i18next'
 import frenchTranslation from 'zod-i18n-map/locales/fr/zod.json'
 import type { FormInterface } from '@/interfaces/productForm.interface'
-import categories from '@/data/categories.json'
+import { onMounted, reactive } from 'vue'
+import type { category } from '@/interfaces/product.interface'
+import { addProducts, getCategories } from '@/services/api.service'
+
+const state = reactive<{
+  categories: category[]
+}>({
+  categories: []
+})
+
+onMounted(async () => (state.categories = await getCategories()))
 
 const myValidationSchema = z.object({
   name: z.string().min(5, { message: 'Le nom doit contenir au moins 5 caractères' }).max(100),
@@ -20,7 +30,7 @@ const myValidationSchema = z.object({
 
 const validationSchema = toTypedSchema(myValidationSchema)
 
-const { errors, defineField, handleSubmit, meta } = useForm<FormInterface>({
+const { errors, defineField, handleSubmit, handleReset, meta } = useForm<FormInterface>({
   validationSchema
 })
 
@@ -32,6 +42,8 @@ const [description] = defineField('description')
 
 const onSuccess = (values: FormInterface): void => {
   console.log(values)
+  addProducts(values)
+  handleReset()
 }
 
 const submitForm = handleSubmit(onSuccess)
@@ -68,7 +80,7 @@ z.setErrorMap(zodI18nMap)
       <div class="mb-3">
         <select v-model="categoryId" class="form-select">
           <option
-            v-for="categorie in categories"
+            v-for="categorie in state.categories"
             :key="categorie.categoryId"
             :value="categorie.categoryId"
           >
