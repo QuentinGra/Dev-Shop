@@ -44,7 +44,6 @@ const [categoryId] = defineField('categoryId')
 const [description] = defineField('description')
 
 const onSuccess = (values: FormInterface): void => {
-  console.log(values)
   addProducts(values)
   handleReset()
 }

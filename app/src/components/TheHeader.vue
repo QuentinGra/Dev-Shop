@@ -4,20 +4,7 @@ import type { productsInterface } from '@/interfaces/product.interface'
 
 defineProps<{
   dataProduct: productsInterface[]
-  currentView: string
 }>()
-
-const emit = defineEmits<{
-  eventNavigationShop: string[]
-}>()
-
-const navigationAdmin = (): void => {
-  emit('eventNavigationShop', 'admin')
-}
-
-const navigationShop = (): void => {
-  emit('eventNavigationShop', 'shop')
-}
 </script>
 
 <template>
@@ -35,10 +22,10 @@ const navigationShop = (): void => {
       <nav id="navbar" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a @click="navigationShop" href.prevent="/" class="nav-link">Accueil</a>
+            <Router-link class="nav-link" to="/">Accueil</Router-link>
           </li>
           <li class="nav-item">
-            <a @click="navigationAdmin" href.prevent="/" class="nav-link">Admin</a>
+            <Router-link class="nav-link" to="/admin">Admin</Router-link>
           </li>
           <li class="nav-item dropdown">
             <a href="/" class="nav-link dropdown-toggle disabled">Déroulant</a>

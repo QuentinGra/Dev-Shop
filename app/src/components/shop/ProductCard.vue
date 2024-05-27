@@ -20,9 +20,11 @@ const addProduct = (product: productsInterface): void => {
       <img :src="'/products/' + dataProduct.illustration" alt="" class="card-img-top test" />
       <div class="card-body text-start">
         <div class="d-flex justify-content-between align-items-start">
-          <a href="" class="text-body text-decoration-none">
-            <h3 class="card-title h4 text-uppercase">{{ dataProduct.name }}</h3>
-          </a>
+          <RouterLink
+            :to="`/product/${dataProduct.productId}`"
+            class="card-title h4 text-uppercase"
+            >{{ dataProduct.name }}</RouterLink
+          >
           <span
             class="badge bg-info bg-body-tertiary text-body h1 fs-6 shadow-sm border border-secondary ms-3"
           >
