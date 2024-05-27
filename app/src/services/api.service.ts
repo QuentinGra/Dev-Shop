@@ -28,12 +28,12 @@ export const getCategories = async (): Promise<category[]> => {
 }
 
 export const addProducts = async (product: FormInterface): Promise<FormInterface> => {
-    const response = await fetch('http://localhost:3030/api/v1/products', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify(product),
-    });
-    return response.json()
+  const response = await fetch('http://localhost:3030/api/v1/products', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(product)
+  })
+  return response.json()
 }

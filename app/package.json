@@ -16,8 +16,10 @@
     "@vee-validate/zod": "^4.12.8",
     "animate.css": "^4.1.1",
     "i18next": "^23.11.5",
+    "pinia": "^2.1.7",
     "vee-validate": "^4.12.8",
     "vue": "^3.4.21",
+    "vue-router": "4",
     "zod": "^3.23.8",
     "zod-i18n-map": "^2.27.0"
   },
@@ -39,6 +41,7 @@
     "typescript": "~5.4.0",
     "vite": "^5.2.8",
     "vite-plugin-vue-devtools": "^7.0.25",
+    "vitest": "^1.6.0",
     "vue-tsc": "^2.0.11"
   }
 }
