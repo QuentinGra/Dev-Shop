@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { type productsInterface } from '@/interfaces/product.interface'
+import { useCartStore } from '@/stores/cart.store'
 
 defineProps<{
   dataProduct: productsInterface
 }>()
 
-const emit = defineEmits<{
-  eventAddProductToBasket: [productsInterface]
-}>()
+const cartStore = useCartStore()
 
-const addProduct = (product: productsInterface): void => {
-  emit('eventAddProductToBasket', product)
+const addProductToCart = (product: productsInterface): void => {
+  cartStore.addProduct(product)
 }
 </script>
 
@@ -38,7 +37,7 @@ const addProduct = (product: productsInterface): void => {
         <p class="card-text mt-5">{{ dataProduct.description }}</p>
         <hr />
         <div class="text-center">
-          <a @click="addProduct(dataProduct)" class="btn btn-info text-uppercase">
+          <a @click="addProductToCart(dataProduct)" class="btn btn-info text-uppercase">
             <i class="me-2 fs-6 bi bi-bag-heart-fill"></i>
             Ajouter au panier
           </a>

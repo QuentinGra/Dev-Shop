@@ -13,9 +13,5 @@ const router = createRouter({
     routes: routes
 })
 
-const pinia = createPinia
-
-const app = createApp(App)
-app.use(router)
-app.use(pinia)
-app.mount('#app')
+const pinia = createPinia()
+createApp(App).use(router).use(pinia).mount('#app')
