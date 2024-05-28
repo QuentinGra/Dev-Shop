@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
 import type { productsInterface } from '@/interfaces/product.interface'
+import { deleteCookie } from '@/utils/cookie.utils'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const textLogin = ref<string>('Connexion')
 
 defineProps<{
   dataProduct: productsInterface[]
@@ -47,7 +53,9 @@ defineProps<{
             <hr class="d-lg-none my-2 text-white-50" />
           </li>
           <li class="nav-item">
-            <a href="/" class="nav-link">Connexion<i class="bi bi-box-arrow-in-right"></i></a>
+            <RouterLink @click="deconnexion()" to="/login" class="nav-link"
+              >{{ textLogin }}<i class="bi bi-box-arrow-in-right"></i
+            ></RouterLink>
           </li>
           <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
             <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>

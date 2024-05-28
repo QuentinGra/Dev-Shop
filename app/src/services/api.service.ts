@@ -14,6 +14,12 @@ export const getProducts = async (): Promise<productsInterface[]> => {
   }
 }
 
+export const getProduct = async (id: number) => {
+  const response = await fetch(`http://localhost:3030/api/v1/products/${id}`)
+  const data = await response.json()
+  return data;
+}
+
 export const getCategories = async (): Promise<category[]> => {
   try {
     const response = await fetch('http://localhost:3030/api/v1/categories')

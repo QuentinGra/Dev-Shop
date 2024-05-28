@@ -10,12 +10,22 @@ const routes : RouteRecordRaw[] = [
     {
         path: '/admin',
         name: 'admin',
-        component: () => import('@/views/AdminView.vue')
+        component: () => import('@/views/AdminView.vue'),
+        beforeEnter: () => {
+            if (!document.cookie.includes('token')) {
+                return '/login'
+            }
+        }
     },
     {
         path: '/product/:id(\\d+)',
         name: 'product',
         component: () => import('@/views/ProductView.vue')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () =>import('@/components/admin/LoginForm.vue')
     },
     {
         path: '/:pathMatch(.*)*',

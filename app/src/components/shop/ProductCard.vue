@@ -22,7 +22,7 @@ const addProduct = (product: productsInterface): void => {
         <div class="d-flex justify-content-between align-items-start">
           <RouterLink
             :to="`/product/${dataProduct.productId}`"
-            class="card-title h4 text-uppercase"
+            class="card-title h4 text-uppercase text-decoration-none"
             >{{ dataProduct.name }}</RouterLink
           >
           <span
