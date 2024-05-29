@@ -1,23 +1,16 @@
 <script setup lang="ts">
 import ThemeDropdown from '@/components/header/ThemeDropdown.vue'
 import type { productsInterface } from '@/interfaces/product.interface'
+import { deleteCookie } from '@/utils/cookie.utils'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const textLogin = ref<string>('Connexion')
 
 defineProps<{
   dataProduct: productsInterface[]
-  currentView: string
 }>()
-
-const emit = defineEmits<{
-  eventNavigationShop: string[]
-}>()
-
-const navigationAdmin = (): void => {
-  emit('eventNavigationShop', 'admin')
-}
-
-const navigationShop = (): void => {
-  emit('eventNavigationShop', 'shop')
-}
 </script>
 
 <template>
@@ -35,10 +28,10 @@ const navigationShop = (): void => {
       <nav id="navbar" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a @click="navigationShop" href.prevent="/" class="nav-link">Accueil</a>
+            <Router-link class="nav-link" to="/">Accueil</Router-link>
           </li>
           <li class="nav-item">
-            <a @click="navigationAdmin" href.prevent="/" class="nav-link">Admin</a>
+            <Router-link class="nav-link" to="/admin">Admin</Router-link>
           </li>
           <li class="nav-item dropdown">
             <a href="/" class="nav-link dropdown-toggle disabled">Déroulant</a>
@@ -60,7 +53,9 @@ const navigationShop = (): void => {
             <hr class="d-lg-none my-2 text-white-50" />
           </li>
           <li class="nav-item">
-            <a href="/" class="nav-link">Connexion<i class="bi bi-box-arrow-in-right"></i></a>
+            <RouterLink @click="deconnexion()" to="/login" class="nav-link"
+              >{{ textLogin }}<i class="bi bi-box-arrow-in-right"></i
+            ></RouterLink>
           </li>
           <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
             <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>

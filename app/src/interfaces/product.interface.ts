@@ -7,6 +7,7 @@ export interface productsInterface {
   createdAt: string
   updateAt: string | null
   categoryId: number
+  quantity?: number
   category: category
 }
 

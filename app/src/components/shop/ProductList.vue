@@ -10,15 +10,10 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   eventToggleFilter: [boolean]
-  eventAddProductToBasket: [productsInterface]
 }>()
 
 const toggleFilter = (): void => {
   emit('eventToggleFilter', true)
-}
-
-const moveProductToBasket = (product: productsInterface): void => {
-  emit('eventAddProductToBasket', product)
 }
 </script>
 
@@ -35,7 +30,7 @@ const moveProductToBasket = (product: productsInterface): void => {
       </div>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
         <div v-for="(product, i) in props.product" :key="i">
-          <ProductCard :data-product="product" @event-add-product-to-basket="moveProductToBasket" />
+          <ProductCard :data-product="product" />
         </div>
       </div>
     </div>

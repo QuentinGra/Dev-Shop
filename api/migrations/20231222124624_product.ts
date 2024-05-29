@@ -13,7 +13,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('name', 100).notNullable().unique()
         table.string('description').notNullable()
         table.decimal('price', 7, 2).notNullable()
-        table.string('illustration', 100)
+        table.string('illustration', 500)
         table.datetime('createdAt').notNullable()
         table.datetime('updateAt')
         table.integer('categoryId').unsigned().notNullable()
